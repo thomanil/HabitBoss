@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/habit_row_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_remove_button_label"
+        android:id="@+id/habit_remove_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_done_button_label"
+        android:id="@+id/habit_done_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
