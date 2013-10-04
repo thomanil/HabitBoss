@@ -16,28 +16,28 @@ import com.tknilsson.habitboss.model.Habit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HabitListAdapter extends ArrayAdapter<String> {
+public class HabitListAdapter extends ArrayAdapter<Habit> {
 
     static private HashMap<Habit.TimeWindow, HabitListAdapter> adapters = new HashMap<Habit.TimeWindow, HabitListAdapter>();
 
     public static HabitListAdapter getAdapterFor(Habit.TimeWindow timeWindow, Context ctx){
         if(!adapters.containsKey(timeWindow)){
-            adapters.put(timeWindow, new HabitListAdapter(ctx, new ArrayList<String>()));
+            adapters.put(timeWindow, new HabitListAdapter(ctx, new ArrayList<Habit>()));
         }
         return adapters.get(timeWindow);
     }
 
     private final Context context;
-    private final ArrayList<String> values;
+    private final ArrayList<Habit> values;
 
-    public HabitListAdapter(Context context, ArrayList<String> values) {
+    public HabitListAdapter(Context context, ArrayList<Habit> values) {
         super(context, R.layout.habit_line, values);
         this.context = context;
         this.values = values;
     }
 
-    public void addNewHabit(String description){
-        values.add(description);
+    public void addNewHabit(Habit habit){
+        values.add(habit);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class HabitListAdapter extends ArrayAdapter<String> {
 
     private View initHabitRow(final int position, View rowView){
         TextView textView = (TextView) rowView.findViewById(R.id.habit_row_text);
-        textView.setText(values.get(position));
+        textView.setText(values.get(position).getDescription());
 
         final Button doneBtn = (Button) rowView.findViewById(R.id.habit_done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {
