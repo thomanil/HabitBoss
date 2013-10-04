@@ -70,6 +70,17 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         if(!habit.canBeMarkedAsDoneAgain()){
             doneBtn.setVisibility(View.INVISIBLE);
             textView.setTextColor(Color.GRAY);
+        } else {
+            textView.setTextColor(Color.BLUE);
+        }
+
+        if(habit.isSoonDue()){
+            int ORANGE = Color.rgb(255, 94, 41);
+            textView.setTextColor(ORANGE);
+        }
+
+        if(habit.isOverdue()){
+            textView.setTextColor(Color.RED);
         }
 
         return rowView;

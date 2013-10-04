@@ -37,13 +37,7 @@ public class Habit {
     }
 
     public String getDescription() {
-        if(isSoonDue()){
-            return " (DUE SOON) " + description;
-        } else if(isOverdue()){
-            return " (OVERDUE) " + description;
-        } else {
-            return description;
-        }
+        return description;
     }
 
     public void setDescription(String description) {
@@ -100,7 +94,7 @@ public class Habit {
 
     public boolean isOverdue() {
         if(timeWindow.equals(TimeWindow.DAILY)){
-           return DateTime.now().isAfter(lastTicked.plusDays(1));
+            return DateTime.now().isAfter(lastTicked.plusDays(1));
         } else if(timeWindow.equals(TimeWindow.WEEKLY)){
             return DateTime.now().isAfter(lastTicked.plusWeeks(1));
         } else if(timeWindow.equals(TimeWindow.MONTHLY)){
@@ -125,6 +119,10 @@ public class Habit {
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
+    }
+
+    public String shorthandTimeTillDue(){
+        return "1hr"; // TODO 1 hr, 2 hrs, 3 hrs... 23 hrs, 1day, 2days... 31 days
     }
 
 

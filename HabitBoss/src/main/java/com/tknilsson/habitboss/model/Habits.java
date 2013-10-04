@@ -19,12 +19,15 @@ public class Habits {
     public static ArrayList<Habit> testFixture (Habit.TimeWindow timeWindow){
         ArrayList<Habit> habits = new ArrayList<Habit>();
         if(timeWindow.equals(Habit.TimeWindow.DAILY)){
-            Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due daily");
+            Habit addedYesterday = new Habit(Habit.Kind.GOOD, timeWindow, "Added yesterday");
+            DateTime lastMidnight = DateTime.now().withTimeAtStartOfDay();
+            addedYesterday.setLastTicked(lastMidnight.minusHours(1));
+            Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Just added, not due");
             Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon daily");
             dueSoon.setLastTicked(DateTime.now().minusHours(23).minusMinutes(59));
             Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue daily");
             overdue.setLastTicked(DateTime.now().minusHours(25));
-            habits.add(notDue); habits.add(dueSoon); habits.add(overdue);
+            habits.add(addedYesterday); habits.add(notDue); habits.add(dueSoon); habits.add(overdue);
         } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
             Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due weekly");
             Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon weekly");
