@@ -48,21 +48,25 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         return initHabitRow(position, rowView);
     }
 
-    private View initHabitRow(final int position, View rowView){
+    private View initHabitRow(final int position, final View rowView){
+        final Habit habit = values.get(position);
+        final HabitListAdapter adapter = this;
+
         TextView textView = (TextView) rowView.findViewById(R.id.habit_row_text);
-        textView.setText(values.get(position).getDescription());
+        textView.setText(habit.getDescription());
 
         final Button doneBtn = (Button) rowView.findViewById(R.id.habit_done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "TODO: set as done: "+position, Toast.LENGTH_SHORT).show();
+                habit.markAsDone();
+                adapter.notifyDataSetInvalidated();
             }
         });
 
         final Button removeBtn = (Button) rowView.findViewById(R.id.habit_remove_button);
         removeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "TODO: remove: "+position, Toast.LENGTH_SHORT).show();
+                values.remove(position);
             }
         });
 

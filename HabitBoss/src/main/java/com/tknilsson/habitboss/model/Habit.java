@@ -24,13 +24,11 @@ public class Habit {
         startNewStreakNow();
     }
 
-    // public Long id // TODO for greenDAO?
     private TimeWindow timeWindow;
     private Kind kind;
     private String description;
     private DateTime lastTicked;
     private DateTime startOfCurrentStreak;
-
 
     public String getDescription() {
         return description;
@@ -44,8 +42,13 @@ public class Habit {
         startOfCurrentStreak = new DateTime();
     }
 
-    // TODO "tick" method
-    // TODO "fail" method (end streak)
+    public void markAsDone(){
+        description += " DONE!";
+    }
+
+    public void fail(){
+        // TODO "fail" method (end streak)
+    }
 
     public boolean isSoonDue() {
         // TODO test/impl: TRUE if less than an hour/day from next day/week/month
