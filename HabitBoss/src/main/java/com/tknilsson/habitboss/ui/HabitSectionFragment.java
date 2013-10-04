@@ -19,6 +19,7 @@ public class HabitSectionFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
 
+
     public String getSectionName(){
         return timeWindow.toString();
     }
@@ -56,7 +57,7 @@ public class HabitSectionFragment extends Fragment {
     HabitListAdapter doHabitAdapter = null;
 
     private void initUI(){
-        doHabitAdapter = HabitListAdapter.getAdapterFor(timeWindow, getView().getContext());
+        doHabitAdapter = Habits.getListAdapter(getView().getContext(), timeWindow);
         ListView doListView = (ListView) getView().findViewById(R.id.habit_making_list);
         doListView.setAdapter(doHabitAdapter);
         updateEditContextAwareElements(MainActivity.editingHabits);

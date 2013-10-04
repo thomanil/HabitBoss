@@ -1,7 +1,6 @@
 * First iteration
 ** Keep working on the UI layer
 *** Set up fixtures for testing
-
 *** Indicate not-done/approaching-deadline states inside app
     Mark tab name with (N) where N is habits close/over deadline
     Also, in each fragment, color code / change rendering of those close/over deadline

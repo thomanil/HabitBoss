@@ -6,38 +6,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class HabitListAdapter extends ArrayAdapter<Habit> {
 
-    static private HashMap<Habit.TimeWindow, HabitListAdapter> adapters = new HashMap<Habit.TimeWindow, HabitListAdapter>();
-
-    public static HabitListAdapter getAdapterFor(Habit.TimeWindow timeWindow, Context ctx){
-        if(!adapters.containsKey(timeWindow)){
-            adapters.put(timeWindow, new HabitListAdapter(ctx, new ArrayList<Habit>()));
-        }
-        return adapters.get(timeWindow);
-    }
-
     private final Context context;
-    private final ArrayList<Habit> values;
+    private final ArrayList<Habit> habits;
 
-    public HabitListAdapter(Context context, ArrayList<Habit> values) {
-        super(context, R.layout.habit_line, values);
+    public HabitListAdapter(Context context, ArrayList<Habit> habits) {
+        super(context, R.layout.habit_line, habits);
         this.context = context;
-        this.values = values;
+        this.habits = habits;
     }
 
     public void addNewHabit(Habit habit){
-        values.add(habit);
+        habits.add(habit);
     }
 
     @Override
@@ -49,7 +37,7 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
     }
 
     private View initHabitRow(final int position, final View rowView){
-        final Habit habit = values.get(position);
+        final Habit habit = habits.get(position);
         final HabitListAdapter adapter = this;
 
         TextView textView = (TextView) rowView.findViewById(R.id.habit_row_text);
@@ -66,7 +54,8 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         final Button removeBtn = (Button) rowView.findViewById(R.id.habit_remove_button);
         removeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                values.remove(position);
+                habits.remove(position);
+                adapter.notifyDataSetInvalidated();
             }
         });
 
