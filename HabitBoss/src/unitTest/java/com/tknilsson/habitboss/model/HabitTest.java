@@ -1,5 +1,7 @@
 package com.tknilsson.habitboss.model;
 
+import com.tknilsson.habitboss.model.Habit;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -10,9 +12,9 @@ public class HabitTest {
 
     @Test
     public void testPresent() {
-       GoodHabit habit = new GoodHabit();
+       Habit habit = new Habit();
        Assert.assertNotNull(habit);
-       Assert.assertFalse(habit.overdue());
+       Assert.assertFalse(habit.isOverdue());
     }
 
 
