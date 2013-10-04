@@ -18,6 +18,15 @@ import java.util.HashMap;
 
 public class HabitListAdapter extends ArrayAdapter<String> {
 
+    static private HashMap<Habit.TimeWindow, HabitListAdapter> adapters = new HashMap<Habit.TimeWindow, HabitListAdapter>();
+
+    public static HabitListAdapter getAdapterFor(Habit.TimeWindow timeWindow, Context ctx){
+        if(!adapters.containsKey(timeWindow)){
+            adapters.put(timeWindow, new HabitListAdapter(ctx, new ArrayList<String>()));
+        }
+        return adapters.get(timeWindow);
+    }
+
     private final Context context;
     private final ArrayList<String> values;
 
@@ -27,13 +36,8 @@ public class HabitListAdapter extends ArrayAdapter<String> {
         this.values = values;
     }
 
-    static private HashMap<Habit.TimeWindow, HabitListAdapter> adapters = new HashMap<Habit.TimeWindow, HabitListAdapter>();
-
-    public static HabitListAdapter getAdapterFor(Habit.TimeWindow timeWindow, Context ctx){
-        if(!adapters.containsKey(timeWindow)){
-            adapters.put(timeWindow, new HabitListAdapter(ctx, new ArrayList<String>()));
-        }
-        return adapters.get(timeWindow);
+    public void addNewHabit(String description){
+        values.add(description);
     }
 
     @Override

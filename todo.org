@@ -1,8 +1,10 @@
 * First iteration
 ** Keep working on the UI layer
-*** Wire Habit model into adapters etc
 *** Make habit descriptions editable in edit mode
-*** Clear out habit checked data as each d/w/m ends
+    Show both editable and non editable field, show/hide as usual
+
+*** Set up background processing
+    Clear out habit checked data as each d/w/m ends
     Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
 *** Indicate not-done/approaching-deadline states inside and outside app
      with red, notificaion/number in icon, mark in tab?
@@ -17,6 +19,7 @@
    Create DAOs (use the greendao stuff)
    Swap out that arraylist with proper db-backed cursor or similar
 ** Improve look and feel
+   Fire up Krita!
 *** Proper logo
     HabitBoss, habit in blue, boss in orange. Just add it in the readme for now.
     Inkscape/SVG it, put asset in git repo
@@ -24,13 +27,13 @@
     Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
     Just put the svg in the git repo
 *** Use icons instead of texts for action bar edit toggle
-*** Figure out how to make entire screen scrollable when habits fill more than screen
 *** Style/theme with striking colors
     Orange & teal
     Orange most dominant, less subtle, used for alerts, notifications, removal
     Blue more suble, multiple shades, most muted, used for confirmations, toasts, dialogs, most widgets
     Use Pantone color book to find nice variations of blue and orange
     To find colors for each element in theme: blueshift regular holo themes & adjust from there
+*** Figure out how to make entire screen scrollable when habits fill more than screen
 ** Background service w/notifications & intents
    Run in background
    Pop up notifications when approaching/breaking deadlines
