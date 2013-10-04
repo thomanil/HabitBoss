@@ -1,7 +1,5 @@
 package com.tknilsson.habitboss.model;
 
-import android.util.Log;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Duration;
@@ -37,7 +35,7 @@ public class Habit {
     }
 
     public String getDescription() {
-        return description;
+        return "("+ getShorthandTimeTillDue()+") "+description;
     }
 
     public void setDescription(String description) {
@@ -121,8 +119,45 @@ public class Habit {
         }
     }
 
-    public String shorthandTimeTillDue(){
-        return "1hr"; // TODO 1 hr, 2 hrs, 3 hrs... 23 hrs, 1day, 2days... 31 days
+    // TODO add test!
+    public String getShorthandTimeTillDue(){
+        DateTime dueDate = null;
+
+        if(timeWindow.equals(TimeWindow.DAILY)){
+           dueDate = getLastTicked().plusHours(24);
+        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
+            dueDate = getLastTicked().plusDays(7);
+        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
+            dueDate = getLastTicked().plusDays(30);
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
+
+        if(DateTime.now().isAfter(dueDate)){
+            return "0 hrs";
+        }
+
+        Duration remaining = (new Interval(DateTime.now(), dueDate)).toDuration();
+        long hoursRemaining = remaining.getStandardHours();
+
+        // 1 hr, 2 hrs, 3 hrs [...] 23 hrs, 1day, 2days, 3days [....]
+        String summary;
+        if (hoursRemaining == 0){
+            summary = "1 hr";
+        } else if(hoursRemaining == 1){
+            summary = "1 hr";
+        } else if (hoursRemaining > 1 && hoursRemaining <= 23){
+            summary = ""+(hoursRemaining+1)+" hrs";
+        } else {
+            long daysRemaining = hoursRemaining / 24;
+            if(daysRemaining == 1){
+                summary = "1 day";
+            } else {
+                summary = ""+(daysRemaining+1)+" days";
+            }
+        }
+
+        return summary;
     }
 
 

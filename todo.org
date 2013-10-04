@@ -1,11 +1,9 @@
 * First iteration
 ** Better indicators for soon/past due/markable habits
-   Show (1hr | 1days) indicator
-
    Number of actionable/markables in section name
 ** Set up background processing
-    Clear out habit checked data as each d/w/m ends
-    Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
+   Clear out habit checked data as each d/w/m ends
+   Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
 ** Implement the habit-breaking part
     have to answer "did you avoid... yesterday|last week|last month?"
     after each period?
