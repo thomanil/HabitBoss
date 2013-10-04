@@ -1,6 +1,8 @@
 package com.tknilsson.habitboss.ui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,16 +42,8 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         final Habit habit = habits.get(position);
         final HabitListAdapter adapter = this;
 
-        String habitDescription = habit.getDescription();
-        if(habit.isSoonDue()){
-            habitDescription += " SOON ";
-        }
-        if(habit.isOverdue()){
-            habitDescription += " PAST ";
-        }
-
         TextView textView = (TextView) rowView.findViewById(R.id.habit_row_text);
-        textView.setText(habitDescription);
+        textView.setText(habit.getDescription());
 
         final Button doneBtn = (Button) rowView.findViewById(R.id.habit_done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +65,11 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             doneBtn.setVisibility(View.INVISIBLE);
         } else {
             removeBtn.setVisibility(View.INVISIBLE);
+        }
+
+        if(!habit.canBeMarkedAsDoneAgain()){
+            doneBtn.setVisibility(View.INVISIBLE);
+            textView.setTextColor(Color.GRAY);
         }
 
         return rowView;

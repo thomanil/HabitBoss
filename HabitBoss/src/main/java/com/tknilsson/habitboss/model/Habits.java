@@ -21,7 +21,7 @@ public class Habits {
         if(timeWindow.equals(Habit.TimeWindow.DAILY)){
             Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due daily");
             Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon daily");
-            dueSoon.setLastTicked(DateTime.now().minusHours(23).minusMinutes(30));
+            dueSoon.setLastTicked(DateTime.now().minusHours(23).minusMinutes(59));
             Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue daily");
             overdue.setLastTicked(DateTime.now().minusHours(25));
             habits.add(notDue); habits.add(dueSoon); habits.add(overdue);

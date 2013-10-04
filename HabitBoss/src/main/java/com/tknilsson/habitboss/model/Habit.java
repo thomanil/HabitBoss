@@ -3,6 +3,7 @@ package com.tknilsson.habitboss.model;
 import android.util.Log;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 
@@ -36,7 +37,13 @@ public class Habit {
     }
 
     public String getDescription() {
-        return description;
+        if(isSoonDue()){
+            return " (DUE SOON) " + description;
+        } else if(isOverdue()){
+            return " (OVERDUE) " + description;
+        } else {
+            return description;
+        }
     }
 
     public void setDescription(String description) {
@@ -65,6 +72,25 @@ public class Habit {
 
     public void markAsDone(){
         setLastTicked(DateTime.now());
+    }
+
+    public boolean canBeMarkedAsDoneAgain(){
+        if(isOverdue() || isSoonDue()){
+            return true;
+        }
+
+        if(timeWindow.equals(TimeWindow.DAILY)){
+            DateTime lastMidnight = DateTime.now().withTimeAtStartOfDay();
+            return (lastTicked.isBefore(lastMidnight));
+        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
+            DateTime lastSunday = DateTime.now().withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(7);
+            return (lastTicked.isBefore(lastSunday));
+        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
+            DateTime endOfLastMonth = new DateTime().minusMonths(1).dayOfMonth().withMaximumValue();
+            return (lastTicked.isBefore(endOfLastMonth));
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
     }
 
     public void fail(){
@@ -100,6 +126,8 @@ public class Habit {
             throw new RuntimeException("Unexpected timewindow type");
         }
     }
+
+
 
 
 
