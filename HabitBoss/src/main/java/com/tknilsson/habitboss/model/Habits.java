@@ -62,12 +62,11 @@ public class Habits {
         }
     }
 
-    public static HabitListAdapter getListAdapter(HabitSectionFragment parent, Context ctx, Habit.TimeWindow timeWindow){
-
+    public static HabitListAdapter getListAdapter(Context ctx, Habit.TimeWindow timeWindow){
         if(!habitLists.containsKey(timeWindow)){
             habitLists.put(timeWindow, newHabitList(timeWindow));
         }
-        return new HabitListAdapter(parent, ctx, habitLists.get(timeWindow));
+        return new HabitListAdapter(ctx, habitLists.get(timeWindow));
     }
 
     public static int countActionable(Habit.TimeWindow timeWindow){
