@@ -1,6 +1,10 @@
 package com.tknilsson.habitboss.model;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.Interval;
 
 
 public class Habit {
@@ -81,8 +85,19 @@ public class Habit {
     }
 
     public boolean isSoonDue() {
-        // TODO test/impl: TRUE if if less than an hour/day from next day/week/month
-        return false;
+        Duration betweenTickAndNow = (new Interval(lastTicked, DateTime.now())).toDuration();
+        long minutesRemaining = betweenTickAndNow.getStandardMinutes();
+        long hoursRemaining = minutesRemaining/60;
+
+        if(timeWindow.equals(TimeWindow.DAILY)){
+            return (minutesRemaining <= 60);
+        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
+            return (hoursRemaining <= 24);
+        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
+            return (hoursRemaining <= 24);
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
     }
 
 

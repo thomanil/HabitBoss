@@ -1,8 +1,6 @@
 * First iteration
 ** Keep working on the UI layer
-*** Implement due-predicates in model
-    unit tests + model methods
-    update fixtures to make some overdue, some due, some not due, some done
+*** update fixtures to make some overdue, some due, some not due, some done
 *** Indicate not-done/approaching-deadline states visually in-app
     Mark tab name with (N) where N is habits close/over deadline
     Also, in each fragment, color code / change rendering of those close/over deadline
