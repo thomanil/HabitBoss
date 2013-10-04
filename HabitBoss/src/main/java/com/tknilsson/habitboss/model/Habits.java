@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.tknilsson.habitboss.ui.HabitListAdapter;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,9 +18,29 @@ public class Habits {
 
     public static ArrayList<Habit> testFixture (Habit.TimeWindow timeWindow){
         ArrayList<Habit> habits = new ArrayList<Habit>();
-        habits.add(new Habit(Habit.Kind.GOOD, timeWindow, "Walk the dog"));
-        habits.add(new Habit(Habit.Kind.GOOD, timeWindow, "Feed the cat"));
-        habits.add(new Habit(Habit.Kind.GOOD, timeWindow, "Herd the sheep"));
+        if(timeWindow.equals(Habit.TimeWindow.DAILY)){
+            Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due daily");
+            Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon daily");
+            dueSoon.setLastTicked(DateTime.now().minusHours(23).minusMinutes(30));
+            Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue daily");
+            overdue.setLastTicked(DateTime.now().minusHours(25));
+            habits.add(notDue); habits.add(dueSoon); habits.add(overdue);
+        } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
+            Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due weekly");
+            Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon weekly");
+            dueSoon.setLastTicked(DateTime.now().minusDays(6).minusHours(12));
+            Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue weekly");
+            overdue.setLastTicked(DateTime.now().minusDays(8));
+            habits.add(notDue); habits.add(dueSoon); habits.add(overdue);
+        } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){
+            Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due monthly");
+            Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon monthly");
+            dueSoon.setLastTicked(DateTime.now().minusDays(29));
+            Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue monthly");
+            overdue.setLastTicked(DateTime.now().minusDays(40));
+            habits.add(notDue); habits.add(dueSoon); habits.add(overdue);
+        }
+
         return habits;
     }
 

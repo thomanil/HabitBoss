@@ -64,7 +64,7 @@ public class Habit {
     }
 
     public void markAsDone(){
-        description += " DONE!"; // TODO
+        setLastTicked(DateTime.now());
     }
 
     public void fail(){
@@ -86,15 +86,16 @@ public class Habit {
 
     public boolean isSoonDue() {
         Duration betweenTickAndNow = (new Interval(lastTicked, DateTime.now())).toDuration();
-        long minutesRemaining = betweenTickAndNow.getStandardMinutes();
-        long hoursRemaining = minutesRemaining/60;
+        long minSinceTick = betweenTickAndNow.getStandardMinutes();
+        long hrsSinceTick = betweenTickAndNow.getStandardHours();
+        long daysSinceTick = betweenTickAndNow.getStandardDays();
 
         if(timeWindow.equals(TimeWindow.DAILY)){
-            return (minutesRemaining <= 60);
+            return (minSinceTick > (23*60)  && minSinceTick < (24*60));
         } else if(timeWindow.equals(TimeWindow.WEEKLY)){
-            return (hoursRemaining <= 24);
+            return (hrsSinceTick > (6*24) && hrsSinceTick < (7*24));
         } else if(timeWindow.equals(TimeWindow.MONTHLY)){
-            return (hoursRemaining <= 24);
+            return (daysSinceTick > 27 && daysSinceTick < 31);
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }

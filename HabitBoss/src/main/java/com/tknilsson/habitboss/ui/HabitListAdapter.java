@@ -40,8 +40,16 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         final Habit habit = habits.get(position);
         final HabitListAdapter adapter = this;
 
+        String habitDescription = habit.getDescription();
+        if(habit.isSoonDue()){
+            habitDescription += " SOON ";
+        }
+        if(habit.isOverdue()){
+            habitDescription += " PAST ";
+        }
+
         TextView textView = (TextView) rowView.findViewById(R.id.habit_row_text);
-        textView.setText(habit.getDescription());
+        textView.setText(habitDescription);
 
         final Button doneBtn = (Button) rowView.findViewById(R.id.habit_done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {

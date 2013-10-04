@@ -5,6 +5,8 @@ import junit.framework.Assert;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import java.lang.RuntimeException;
+
 import static org.junit.Assert.*;
 
 public class HabitTest {
@@ -60,42 +62,53 @@ public class HabitTest {
     public void testDailyDueSoonOnceWithinAnHourOfDueTime() {
         Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
 
-        habit.setLastTicked(DateTime.now().minusHours(300));
+        habit.setLastTicked(DateTime.now().minusMinutes(30));
         Assert.assertFalse(habit.isSoonDue());
 
         habit.setLastTicked(DateTime.now().minusHours(10));
         Assert.assertFalse(habit.isSoonDue());
 
-        habit.setLastTicked(DateTime.now().minusMinutes(30));
+        habit.setLastTicked(DateTime.now().minusHours(23).minusMinutes(30));
         Assert.assertTrue(habit.isSoonDue());
     }
+
 
     @Test
     public void testWeeklyDueSoonWhenWithinADayOfDueTime() {
         Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
 
-        habit.setLastTicked(DateTime.now().minusDays(300));
+        habit.setLastTicked(DateTime.now().minusDays(1));
         Assert.assertFalse(habit.isSoonDue());
 
-        habit.setLastTicked(DateTime.now().minusDays(10));
+        habit.setLastTicked(DateTime.now().minusDays(5));
         Assert.assertFalse(habit.isSoonDue());
 
-        habit.setLastTicked(DateTime.now().minusHours(10));
+        habit.setLastTicked(DateTime.now().minusDays(6).minusHours(12));
         Assert.assertTrue(habit.isSoonDue());
     }
 
     @Test
-    public void testMonthlyDueSoonWhenWithinADayOfDueTime() {
+    public void testMonthlyDueSoonWhenWithinAThreeDaysOfDueTime() {
         Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
 
-        habit.setLastTicked(DateTime.now().minusDays(300));
+        habit.setLastTicked(DateTime.now().minusDays(25));
         Assert.assertFalse(habit.isSoonDue());
 
         habit.setLastTicked(DateTime.now().minusDays(10));
         Assert.assertFalse(habit.isSoonDue());
 
-        habit.setLastTicked(DateTime.now().minusHours(10));
+        habit.setLastTicked(DateTime.now().minusDays(29));
         Assert.assertTrue(habit.isSoonDue());
+    }
+
+    @Test
+    public void testSetHabitDone() {
+        Habit dailyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        dailyHabit.setLastTicked(DateTime.now().minusMonths(2));
+        Assert.assertTrue(dailyHabit.isOverdue());
+        dailyHabit.markAsDone();
+        Assert.assertFalse(dailyHabit.isOverdue());
+        Assert.assertFalse(dailyHabit.isSoonDue());
     }
 
 }
