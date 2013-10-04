@@ -1,11 +1,11 @@
 package com.tknilsson.habitboss.model;
 
+import org.joda.time.DateTime;
 
-import java.util.Date;
 
 public class Habit {
 
-    public enum Temporality {
+    public enum TimeWindow {
         DAILY, WEEKLY, MONTHLY
     }
 
@@ -14,26 +14,31 @@ public class Habit {
     }
 
     private Habit (){
-
+        // Force us to always instantiate with kind and timewindow
     }
 
-    public Habit(Kind kind, Temporality temporality){
+    public Habit(Kind kind, TimeWindow timeWindow){
         this.kind = kind;
-        this.temporality = temporality;
+        this.timeWindow = timeWindow;
+        startNewStreakNow();
     }
 
-    private Temporality temporality;
+    private TimeWindow timeWindow;
     private Kind kind;
-    private Date lastTicked;
+    private DateTime lastTicked;
+    private DateTime startOfCurrentStreak;
 
-    // TODO Model/persist stats on when user failed to keep/avoid the habit
-    //private day/week/month fails
+    public void startNewStreakNow(){
+        startOfCurrentStreak = new DateTime();
+    }
 
     public boolean isSoonDue() {
+        // TRUE if less than an hour/day from next day/week/month
         return false;
     }
 
     public boolean isOverdue() {
+        // TRUE if more than one day/week/month since lastConfirmed
         return false;
     }
 
