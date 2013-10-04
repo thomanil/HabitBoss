@@ -5,12 +5,25 @@ import java.util.Date;
 
 public class Habit {
 
-    public enum TimeType {
+    public enum Temporality {
         DAILY, WEEKLY, MONTHLY
     }
 
-    private TimeType timeType;
+    public enum Kind {
+        GOOD, BAD
+    }
 
+    private Habit (){
+
+    }
+
+    public Habit(Kind kind, Temporality temporality){
+        this.kind = kind;
+        this.temporality = temporality;
+    }
+
+    private Temporality temporality;
+    private Kind kind;
     private Date lastTicked;
 
     // TODO Model/persist stats on when user failed to keep/avoid the habit

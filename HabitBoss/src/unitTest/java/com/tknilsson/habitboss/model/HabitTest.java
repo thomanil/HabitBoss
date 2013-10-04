@@ -12,12 +12,10 @@ public class HabitTest {
 
     @Test
     public void testPresent() {
-       Habit habit = new Habit();
+       Habit habit = new Habit(Habit.Kind.GOOD, Habit.Temporality.DAILY);
        Assert.assertNotNull(habit);
        Assert.assertFalse(habit.isOverdue());
+       Assert.assertFalse(habit.isSoonDue());
     }
-
-
-
 
 }

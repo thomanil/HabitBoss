@@ -33,12 +33,16 @@
     Blue more suble, multiple shades, most muted, used for confirmations, toasts, dialogs, most widgets
     Use Pantone color book to find nice variations of blue and orange
     To find colors for each element in theme: blueshift regular holo themes & adjust from there
+** Background service w/notifications & intents
+   Run in background
+   Pop up notifications when approaching/breaking deadlines
+   Pop up notifications with "did you avoid BADHABIT last period?"
+   Link notifications into intent to HB app
+
 ** Publish on marketplace
    Make it available
    Also spend some time on marketplace, learn about visibility etc http://developer.android.com/distribute/index.html)
 * More features
-** Backend sync
-   Use Cloud Save or Google Drive SDK, or something else?
 ** More satisfying/visceral feedback on clearing habits
    Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
    Vibration
@@ -51,8 +55,10 @@
 ** Store/visualize streaks/stats
    Implement and persist Habit.fails variable
    Seinfeld calendar view: visualize each habit streak
-** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
+** Backend sync
+   Use Cloud Save or Google Drive SDK, or something else?
 ** Widget (resizable??)
+** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
 ** Support Nexus 7/tablet form factors
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
