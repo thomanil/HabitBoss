@@ -19,9 +19,8 @@ public class HabitSectionFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
 
-
     public String getSectionName(){
-        return timeWindow.toString();
+        return timeWindow.toString()+" ("+Habits.countActionable(timeWindow)+")";
     }
 
     private HabitSectionFragment() {

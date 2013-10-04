@@ -3,12 +3,19 @@ package com.tknilsson.habitboss.model;
 
 import android.content.Context;
 
+import com.google.common.base.Predicate;
 import com.tknilsson.habitboss.ui.HabitListAdapter;
+import com.tknilsson.habitboss.ui.HabitSectionFragment;
 
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+
+import static com.google.common.collect.Collections2.*;
+
+import javax.annotation.Nullable;
 
 public class Habits {
 
@@ -55,10 +62,26 @@ public class Habits {
         }
     }
 
-    public static HabitListAdapter getListAdapter(Context ctx, Habit.TimeWindow timeWindow){
+    public static HabitListAdapter getListAdapter(HabitSectionFragment parent, Context ctx, Habit.TimeWindow timeWindow){
+
         if(!habitLists.containsKey(timeWindow)){
             habitLists.put(timeWindow, newHabitList(timeWindow));
         }
-        return new HabitListAdapter(ctx, habitLists.get(timeWindow));
+        return new HabitListAdapter(parent, ctx, habitLists.get(timeWindow));
+    }
+
+    public static int countActionable(Habit.TimeWindow timeWindow){
+        if(habitLists == null || habitLists.get(timeWindow) == null){
+            return 0;
+        }
+
+        Collection habits = habitLists.get(timeWindow);
+
+        return filter(habits, new Predicate() {
+            @Override
+            public boolean apply(@Nullable Object o) {
+                return ((Habit)o).canBeMarkedAsDoneAgain();
+            }
+        }).size();
     }
 }

@@ -119,8 +119,12 @@ public class Habit {
         }
     }
 
-    // TODO add test!
+    // TODO add tests!
     public String getShorthandTimeTillDue(){
+        if(isOverdue()){
+            return "0m";
+        }
+
         DateTime dueDate = null;
 
         if(timeWindow.equals(TimeWindow.DAILY)){
@@ -133,27 +137,24 @@ public class Habit {
             throw new RuntimeException("Unexpected timewindow type");
         }
 
-        if(DateTime.now().isAfter(dueDate)){
-            return "0 hrs";
-        }
-
         Duration remaining = (new Interval(DateTime.now(), dueDate)).toDuration();
         long hoursRemaining = remaining.getStandardHours();
+        long minutesRemaining = remaining.getStandardMinutes();
+        long daysRemaining = remaining.getStandardDays();
 
         // 1 hr, 2 hrs, 3 hrs [...] 23 hrs, 1day, 2days, 3days [....]
         String summary;
         if (hoursRemaining == 0){
-            summary = "1 hr";
+            summary = ""+(minutesRemaining+1)+"m";
         } else if(hoursRemaining == 1){
-            summary = "1 hr";
+            summary = "1hr";
         } else if (hoursRemaining > 1 && hoursRemaining <= 23){
-            summary = ""+(hoursRemaining+1)+" hrs";
+            summary = ""+(hoursRemaining+1)+"hr";
         } else {
-            long daysRemaining = hoursRemaining / 24;
             if(daysRemaining == 1){
-                summary = "1 day";
+                summary = "1d";
             } else {
-                summary = ""+(daysRemaining+1)+" days";
+                summary = ""+(daysRemaining+1)+"d";
             }
         }
 
