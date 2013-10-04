@@ -36,7 +36,4 @@ public class Habits {
         }
         return new HabitListAdapter(ctx, habitLists.get(timeWindow));
     }
-
-
-
 }

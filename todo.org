@@ -1,12 +1,15 @@
 * First iteration
 ** Keep working on the UI layer
-*** Indicate not-done/approaching-deadline states inside app
+*** Implement due-predicates in model
+    unit tests + model methods
+    update fixtures to make some overdue, some due, some not due, some done
+*** Indicate not-done/approaching-deadline states visually in-app
     Mark tab name with (N) where N is habits close/over deadline
     Also, in each fragment, color code / change rendering of those close/over deadline
-*** Set up background processing
+** Set up background processing
     Clear out habit checked data as each d/w/m ends
     Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
-*** Implement the habit-breaking part
+** Implement the habit-breaking part
     have to answer "did you avoid... yesterday|last week|last month?"
     after each period?
     Store creation time, on each startup, check if any have surpassed
