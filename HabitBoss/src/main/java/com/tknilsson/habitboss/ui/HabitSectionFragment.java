@@ -54,6 +54,7 @@ public class HabitSectionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+
     HabitListAdapter doHabitAdapter = null;
 
     private void initUI(){
