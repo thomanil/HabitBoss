@@ -44,6 +44,9 @@ public class Habit {
         startOfCurrentStreak = new DateTime();
     }
 
+    // TODO "tick" method
+    // TODO "fail" method (end streak)
+
     public boolean isSoonDue() {
         // TODO test/impl: TRUE if less than an hour/day from next day/week/month
         return false;

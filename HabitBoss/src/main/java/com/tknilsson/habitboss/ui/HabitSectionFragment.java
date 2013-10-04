@@ -10,20 +10,30 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.tknilsson.habitboss.R;
+import com.tknilsson.habitboss.model.Habit;
+import com.tknilsson.habitboss.model.Habits;
 
 import java.util.ArrayList;
 
 public class HabitSectionFragment extends Fragment {
 
+    private Habit.TimeWindow timeWindow;
 
+    public String getSectionName(){
+        return timeWindow.toString();
+    }
 
-    public HabitSectionFragment() {
+    private HabitSectionFragment() {
+       // Always specify what sort of habits the section should handle
+    }
+
+    public HabitSectionFragment(Habit.TimeWindow timeWindow) {
+        this.timeWindow = timeWindow;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initModel();
     }
 
     @Override
@@ -43,18 +53,10 @@ public class HabitSectionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-    ArrayList<String> doItems = new ArrayList<String>();
-
-    private void initModel(){
-        doItems.add("Walk the dog");
-        doItems.add("Feed the cat");
-        doItems.add("Herd the sheep");
-    }
-
     HabitListAdapter doHabitAdapter = null;
 
     private void initUI(){
-        doHabitAdapter = new HabitListAdapter(getView().getContext(), doItems);
+        doHabitAdapter = HabitListAdapter.getAdapterFor(timeWindow, getView().getContext());
         ListView doListView = (ListView) getView().findViewById(R.id.habit_making_list);
         doListView.setAdapter(doHabitAdapter);
         updateEditContextAwareElements(MainActivity.editingHabits);

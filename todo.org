@@ -1,21 +1,18 @@
 * First iteration
-** Implement Habit model
-
 ** Keep working on the UI layer
 *** Wire Habit model into adapters etc
+*** Make habit descriptions editable in edit mode
 *** Clear out habit checked data as each d/w/m ends
     Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
 *** Indicate not-done/approaching-deadline states inside and outside app
      with red, notificaion/number in icon, mark in tab?
      If not done with habit in day/week/month, show notificcation & red counter in app icon
-*** Make habit descriptions editable in edit mode
 *** Implement the habit-breaking part
     have to answer "did you avoid... yesterday|last week|last month?"
     after each period?
     Store creation time, on each startup, check if any have surpassed
     their current day/week/month since last check, Fire off question to
     user if habit has been upheld.
-
 ** Add db persistence
    Create DAOs (use the greendao stuff)
    Swap out that arraylist with proper db-backed cursor or similar

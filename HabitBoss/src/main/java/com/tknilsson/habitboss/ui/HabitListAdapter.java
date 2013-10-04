@@ -11,8 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tknilsson.habitboss.R;
+import com.tknilsson.habitboss.model.Habit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HabitListAdapter extends ArrayAdapter<String> {
 
@@ -23,6 +25,15 @@ public class HabitListAdapter extends ArrayAdapter<String> {
         super(context, R.layout.habit_line, values);
         this.context = context;
         this.values = values;
+    }
+
+    static private HashMap<Habit.TimeWindow, HabitListAdapter> adapters = new HashMap<Habit.TimeWindow, HabitListAdapter>();
+
+    public static HabitListAdapter getAdapterFor(Habit.TimeWindow timeWindow, Context ctx){
+        if(!adapters.containsKey(timeWindow)){
+            adapters.put(timeWindow, new HabitListAdapter(ctx, new ArrayList<String>()));
+        }
+        return adapters.get(timeWindow);
     }
 
     @Override
