@@ -17,29 +17,43 @@ public class Habit {
         // Force us to always instantiate with kind and timewindow
     }
 
-    public Habit(Kind kind, TimeWindow timeWindow){
+    public Habit(Kind kind, TimeWindow timeWindow, String description){
         this.kind = kind;
         this.timeWindow = timeWindow;
+        this.setDescription(description);
         startNewStreakNow();
     }
 
+    // public Long id // TODO for greenDAO?
     private TimeWindow timeWindow;
     private Kind kind;
+    private String description;
     private DateTime lastTicked;
     private DateTime startOfCurrentStreak;
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public void startNewStreakNow(){
         startOfCurrentStreak = new DateTime();
     }
 
     public boolean isSoonDue() {
-        // TRUE if less than an hour/day from next day/week/month
+        // TODO test/impl: TRUE if less than an hour/day from next day/week/month
         return false;
     }
 
     public boolean isOverdue() {
-        // TRUE if more than one day/week/month since lastConfirmed
+        // TODO test/iompl: TRUE if more than one day/week/month since lastConfirmed
         return false;
     }
+
+
 
 }

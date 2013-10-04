@@ -50,6 +50,7 @@ dependencies {
     unitTestCompile 'org.robolectric:robolectric:2.1.1'
     unitTestCompile 'com.google.android:android:4.0.1.2'
     unitTestCompile 'com.google.guava:guava:12.0'
+    unitTestCompile 'joda-time:joda-time:2.3'
 }
 
 task unitTest(type:Test, dependsOn: assemble) {
@@ -59,4 +60,3 @@ task unitTest(type:Test, dependsOn: assemble) {
 }
 
 check.dependsOn unitTest
-
