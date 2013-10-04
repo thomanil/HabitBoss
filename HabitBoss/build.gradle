@@ -25,4 +25,38 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:13.0.+'
     compile 'com.google.guava:guava:12.0'
+    compile 'joda-time:joda-time:2.3'
 }
+
+// The below is not standard Android/Gradle, but adds unit test support which is not
+// present in the standard Android/Gradle defaults at the time of this commit.
+// (See http://tryge.com/2013/02/28/android-gradle-build/)
+
+sourceSets {
+    unitTest {
+        java.srcDir file('unitTest/java')
+        resources.srcDir file('unitTest/resources')
+    }
+}
+
+configurations {
+    unitTestCompile.extendsFrom runtime
+    unitTestRuntime.extendsFrom unitTestCompile
+}
+
+dependencies {
+    unitTestCompile files("$project.buildDir/classes/release")
+    unitTestCompile 'junit:junit:4.11'
+    unitTestCompile 'org.robolectric:robolectric:2.1.1'
+    unitTestCompile 'com.google.android:android:4.0.1.2'
+    unitTestCompile 'com.google.guava:guava:12.0'
+}
+
+task unitTest(type:Test, dependsOn: assemble) {
+    description = "run unit tests"
+    testClassesDir = project.sourceSets.unitTest.output.classesDir
+    classpath = project.sourceSets.unitTest.runtimeClasspath
+}
+
+check.dependsOn unitTest
+

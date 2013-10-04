@@ -1,12 +1,6 @@
 * First iteration
 ** Implement Habit model
-   Pull in Yoda-time
-   Pull in Guava
-   Setup basic junit tests
-   "is deadlineup yet?" etc domain logic
-   Fields: time window type, last marked
-   Methods: dueSoon, pastDue
-   What do we need for the habits we need to break?
+
 ** Keep working on the UI layer
 *** Wire Habit model into adapters etc
 *** Clear out habit checked data as each d/w/m ends
@@ -45,7 +39,6 @@
 * More features
 ** Backend sync
    Use Cloud Save or Google Drive SDK, or something else?
-** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
 ** More satisfying/visceral feedback on clearing habits
    Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
    Vibration
@@ -54,9 +47,12 @@
    Stylized unicorn, puppies, kittens, etc gfx?
    Fanfare if sound is turned on
    This is a touch of gamification. Think popcap/blizzard - Peggle!
-** Widget (resizable??)
 
-** Seinfeld calendar view: visualize each habit streak
+** Store/visualize streaks/stats
+   Implement and persist Habit.fails variable
+   Seinfeld calendar view: visualize each habit streak
+** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
+** Widget (resizable??)
 ** Support Nexus 7/tablet form factors
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
