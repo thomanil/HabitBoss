@@ -19,17 +19,33 @@ public class HabitsTest  {
 
     @Test
     public void testModelToAndFromJson() {
-        Habits original = Habits.getTestFixture();
-        String jsonRepresentation = Habits.toJson(original);
-        Habits remarshalled = Habits.fromJson(jsonRepresentation);
-        Objects.equal(original, remarshalled);
+        Habits originalModel = Habits.getTestFixture();
+        String jsonRepresentation = Habits.toJson(originalModel);
+        Habits remarshalledModel = Habits.fromJson(jsonRepresentation);
+        Objects.equal(originalModel, remarshalledModel);
     }
 
-    // TODO also add a test which does the inverse: json->model->json
+    @Test
+    public void testJsonToAndFromModel() {
+        String originalJson = Habits.toJson(Habits.getTestFixture());
+        Habits marshalledModel  = Habits.fromJson(originalJson);
+        String reserializedJson = Habits.toJson(marshalledModel);
+        Objects.equal(originalJson, reserializedJson);
+    }
 
     @Test
     public void testActionable(){
         // TODO just use fixture, check that it holds, and that it changes when state is changed
+    }
+
+    @Test
+    public void testGetDueDate(){
+        // TODO
+    }
+
+    @Test
+    public void testGetShorthandTimeTillDue(){
+        // TODO
     }
 
 }

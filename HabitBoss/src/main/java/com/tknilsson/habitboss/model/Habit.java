@@ -131,29 +131,24 @@ public class Habit {
         }
     }
 
+    private DateTime getDueDate(){
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
+            return getLastTicked().plusHours(24);
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
+            return getLastTicked().plusDays(7);
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
+            return getLastTicked().plusDays(30);
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
+    }
 
-
-
-
-    // TODO add junit test coverage!
     public String getShorthandTimeTillDue(){
         if(isOverdue()){
             return "0m";
         }
 
-        DateTime dueDate = null;
-
-        if(getTimeWindow().equals(TimeWindow.DAILY)){
-           dueDate = getLastTicked().plusHours(24);
-        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
-            dueDate = getLastTicked().plusDays(7);
-        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
-            dueDate = getLastTicked().plusDays(30);
-        } else {
-            throw new RuntimeException("Unexpected timewindow type");
-        }
-
-        Duration remaining = (new Interval(DateTime.now(), dueDate)).toDuration();
+        Duration remaining = (new Interval(DateTime.now(), getDueDate())).toDuration();
         long hoursRemaining = remaining.getStandardHours();
         long minutesRemaining = remaining.getStandardMinutes();
         long daysRemaining = remaining.getStandardDays();
