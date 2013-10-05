@@ -6,7 +6,6 @@
    Pop up notifications when approaching/breaking deadlines
    Pop up notifications with "did you avoid BADHABIT last period?"
 ** Improve look and feel
-   Fix Krita install!
 *** Proper logo
     HabitBoss, habit in blue, boss in orange. Just add it in the readme for now.
     Inkscape/SVG it, put asset in git repo
@@ -49,7 +48,6 @@
 ** Backend sync
    Use Cloud Save or Google Drive SDK, or something else?
 ** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
-** Widget (resizable??)
 ** Support Nexus 7/tablet form factors
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
