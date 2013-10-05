@@ -21,16 +21,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
+     * fragments for each of the pages. We use a
      * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
      * will keep every loaded fragment in memory. If this becomes too memory
      * intensive, it may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    SectionsPagerAdapter mSectionsPagerAdapter;
+    HabitPagesPagerAdapter mHabitPagesPagerAdapter;
 
     /**
-     * The {@link ViewPager} that will host the section contents.
+     * The {@link ViewPager} that will host the page contents.
      */
     ViewPager mViewPager;
 
@@ -65,17 +65,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
-        // primary sections of the app.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
+        // primary pages of the app.
+        mHabitPagesPagerAdapter = new HabitPagesPagerAdapter(getSupportFragmentManager(), this);
 
-        // Set up the ViewPager with the sections adapter.
+        // Set up the ViewPager with the pages adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setAdapter(mHabitPagesPagerAdapter);
 
         // Force all 3 pages to init/load at once, not just current and adjacent
         mViewPager.setOffscreenPageLimit(2);
 
-        // When swiping between different sections, select the corresponding
+        // When swiping between different pages, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
         // a reference to the Tab.
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -85,14 +85,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             }
         });
 
-        // For each of the sections in the app, add a tab to the action bar.
-        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+        // For each of the pages in the app, add a tab to the action bar.
+        for (int i = 0; i < mHabitPagesPagerAdapter.getCount(); i++) {
             // Create a tab with text corresponding to the page title defined by
             // the adapter. Also specify this Activity object, which implements
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
             tabs.add(actionBar.newTab()
-                    .setText(mSectionsPagerAdapter.getPageTitle(i))
+                    .setText(mHabitPagesPagerAdapter.getPageTitle(i))
                     .setTabListener(this));
 
             actionBar.addTab(tabs.get(i));
@@ -172,8 +172,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private void toggleEditMode(){
         editingHabits = !editingHabits;
         initEditToggleAction();
-        SectionsPagerAdapter pagerAdapter = (SectionsPagerAdapter) mViewPager.getAdapter();
-        pagerAdapter.updateEditAwareElementsonAllSections(editingHabits);
+        HabitPagesPagerAdapter pagerAdapter = (HabitPagesPagerAdapter) mViewPager.getAdapter();
+        pagerAdapter.updateEditAwareElementsonAllPages(editingHabits);
         refreshTabTitles();
     }
 
@@ -184,28 +184,28 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     public void refreshTabTitles(){
         if(tabs.size() == 3){
-            tabs.get(0).setText(mSectionsPagerAdapter.getPageTitle(0));
-            tabs.get(1).setText(mSectionsPagerAdapter.getPageTitle(1));
-            tabs.get(2).setText(mSectionsPagerAdapter.getPageTitle(2));
+            tabs.get(0).setText(mHabitPagesPagerAdapter.getPageTitle(0));
+            tabs.get(1).setText(mHabitPagesPagerAdapter.getPageTitle(1));
+            tabs.get(2).setText(mHabitPagesPagerAdapter.getPageTitle(2));
         }
         mViewPager.invalidate();
     }
 
     public void refreshAllHabitPages(){
-        ((HabitSectionFragment)mSectionsPagerAdapter.getItem(0)).initUI();
-        ((HabitSectionFragment)mSectionsPagerAdapter.getItem(1)).initUI();
-        ((HabitSectionFragment)mSectionsPagerAdapter.getItem(2)).initUI();
+        ((HabitPageFragment) mHabitPagesPagerAdapter.getItem(0)).initUI();
+        ((HabitPageFragment) mHabitPagesPagerAdapter.getItem(1)).initUI();
+        ((HabitPageFragment) mHabitPagesPagerAdapter.getItem(2)).initUI();
         refreshTabTitles();
     }
 
     public void addHabit(View view) {
-        getCurrentSectionFragment().addHabit(view);
+        getCurrentPageFragment().addHabit(view);
         hideKeyboard(view);
     }
 
-    private HabitSectionFragment getCurrentSectionFragment(){
-        SectionsPagerAdapter pagerAdapter = (SectionsPagerAdapter) mViewPager.getAdapter();
-        return (HabitSectionFragment) pagerAdapter.getItem(mViewPager.getCurrentItem());
+    private HabitPageFragment getCurrentPageFragment(){
+        HabitPagesPagerAdapter pagerAdapter = (HabitPagesPagerAdapter) mViewPager.getAdapter();
+        return (HabitPageFragment) pagerAdapter.getItem(mViewPager.getCurrentItem());
     }
 
     private void hideKeyboard(View view){

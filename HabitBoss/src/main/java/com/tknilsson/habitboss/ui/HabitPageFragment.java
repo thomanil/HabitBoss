@@ -13,11 +13,11 @@ import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
 import com.tknilsson.habitboss.model.HabitsManager;
 
-public class HabitSectionFragment extends Fragment {
+public class HabitPageFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
 
-    public String getSectionName(){
+    public String getPageName(){
         int actionCount = HabitsManager.countActionable(timeWindow);
         if(actionCount == 0){
             return timeWindow.toString();
@@ -26,7 +26,7 @@ public class HabitSectionFragment extends Fragment {
         }
     }
 
-    public HabitSectionFragment(Habit.TimeWindow timeWindow) {
+    public HabitPageFragment(Habit.TimeWindow timeWindow) {
         this.timeWindow = timeWindow;
     }
 
@@ -38,7 +38,7 @@ public class HabitSectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.habit_section, container, false);
+        return inflater.inflate(R.layout.habit_page, container, false);
     }
 
     @Override
