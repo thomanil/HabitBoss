@@ -52,6 +52,11 @@ public class Habits {
         return habits;
     }
 
+    public static void initHabitState(){}
+
+    public static void initHabitStateWithFixtures(){}
+
+
     public static ArrayList<Habit> newHabitList(Habit.TimeWindow timeWindow){
         if(INIT_LISTS_WITH_FIXTURES){
            return testFixture(timeWindow);
@@ -61,18 +66,18 @@ public class Habits {
     }
 
     public static HabitListAdapter getListAdapter(Context ctx, Habit.TimeWindow timeWindow){
-        if(!habitLists.containsKey(timeWindow)){
-            habitLists.put(timeWindow, newHabitList(timeWindow));
+        if(!getHabitLists().containsKey(timeWindow)){
+            getHabitLists().put(timeWindow, newHabitList(timeWindow));
         }
-        return new HabitListAdapter(ctx, habitLists.get(timeWindow));
+        return new HabitListAdapter(ctx, getHabitLists().get(timeWindow));
     }
 
     public static int countActionable(Habit.TimeWindow timeWindow){
-        if(habitLists == null || habitLists.get(timeWindow) == null){
+        if(getHabitLists() == null || getHabitLists().get(timeWindow) == null){
             return 0;
         }
 
-        Collection habits = habitLists.get(timeWindow);
+        Collection habits = getHabitLists().get(timeWindow);
 
         return filter(habits, new Predicate() {
             @Override
@@ -82,12 +87,20 @@ public class Habits {
         }).size();
     }
 
+    public static HashMap<Habit.TimeWindow, ArrayList<Habit>> getHabitLists() {
+        return habitLists;
+    }
 
-    private String habitsToJson(HashMap<Habit.TimeWindow, ArrayList<Habit>> habitsLists){
+    public static void setHabitLists(HashMap<Habit.TimeWindow, ArrayList<Habit>> habitLists) {
+        Habits.habitLists = habitLists;
+    }
+
+
+    protected static String toJson(HashMap<Habit.TimeWindow, ArrayList<Habit>> habitsLists){
         return "json";
     }
 
-    private HashMap<Habit.TimeWindow, ArrayList<Habit>> habitsFromJson(String json){
+    protected static HashMap<Habit.TimeWindow, ArrayList<Habit>> fromJson(String json){
         return new HashMap<Habit.TimeWindow, ArrayList<Habit>>();
     }
 

@@ -1,8 +1,6 @@
 * First iteration
-** Add db persistence
-   Create DAOs (use the greendao stuff)
-   Swap out that arraylist with proper db-backed cursor or similar
-   Initial dataset, include example habits
+** Persist habits
+
 ** Add background processing + out-of app notifications
    Run service in background
    Run fail processing & end streaks for habits that cross their threshold

@@ -161,8 +161,6 @@ public class HabitTest  {
         Assert.assertFalse(nonMarkable.canBeMarkedAsDoneAgain());
     }
 
-
-
     @Test
     public void testWhenIsMonthlyMarkableAgain() {
         DateTime endOfLastMonth = new DateTime().minusMonths(1).dayOfMonth().withMaximumValue();
