@@ -23,6 +23,7 @@
 *** Figure out how to make entire screen scrollable when habits fill more than screen
 ** Publish on marketplace
    Make it available
+   Check what happens with habits local file storage when upgrading version of app on play store
    Also spend some time on marketplace, learn about visibility etc http://developer.android.com/distribute/index.html)
 * More features
 ** Implement the habit-breaking part
