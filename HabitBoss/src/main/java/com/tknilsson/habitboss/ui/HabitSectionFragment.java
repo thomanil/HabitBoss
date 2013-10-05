@@ -23,10 +23,6 @@ public class HabitSectionFragment extends Fragment {
         return timeWindow.toString()+" ("+Habits.countActionable(timeWindow)+")";
     }
 
-    private HabitSectionFragment() {
-       // Always specify what sort of habits the section should handle
-    }
-
     public HabitSectionFragment(Habit.TimeWindow timeWindow) {
         this.timeWindow = timeWindow;
     }

@@ -5,14 +5,14 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import com.tknilsson.habitboss.R;
+
+import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
@@ -31,11 +31,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
      */
     ViewPager mViewPager;
 
+    private ArrayList<ActionBar.Tab> tabs = new ArrayList<ActionBar.Tab>();
+    private Menu currentMenuOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initActionBarAndTabs();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        refreshTabTitles();
     }
 
     private void initActionBarAndTabs(){
@@ -68,20 +77,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             // the adapter. Also specify this Activity object, which implements
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
+            tabs.add(actionBar.newTab()
+                    .setText(mSectionsPagerAdapter.getPageTitle(i))
+                    .setTabListener(this));
+
+            actionBar.addTab(tabs.get(i));
         }
     }
-
-    private Menu currentMenu;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        currentMenu = menu;
+        currentMenuOptions = menu;
         initEditToggleAction();
         return true;
     }
@@ -125,7 +133,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             editToggleText = getString(R.string.finish_edit);
         }
 
-        currentMenu.findItem(R.id.toggle_edit_mode).setTitle(editToggleText);
+        currentMenuOptions.findItem(R.id.toggle_edit_mode).setTitle(editToggleText);
     }
 
     private void toggleEditMode(){
@@ -133,6 +141,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         initEditToggleAction();
         SectionsPagerAdapter pagerAdapter = (SectionsPagerAdapter) mViewPager.getAdapter();
         pagerAdapter.updateEditAwareElementsonAllSections(editingHabits);
+        refreshTabTitles();
+    }
+
+    private void refreshTabTitles(){
+        if(tabs.size() == 3){
+            tabs.get(0).setText(mSectionsPagerAdapter.getPageTitle(0));
+            tabs.get(1).setText(mSectionsPagerAdapter.getPageTitle(1));
+            tabs.get(2).setText(mSectionsPagerAdapter.getPageTitle(2));
+        }
+        mViewPager.invalidate();
     }
 
     public void addHabit(View view) {
