@@ -1,9 +1,4 @@
 * First iteration
-** Refactor
-
-   look for other stuff to move there as well:
-   Make get(timewindow) stuff less cryptic - give it a human readable name
-
 ** Do json + persistence bits
 ** Add background processing + out-of app notifications
    Run service in background

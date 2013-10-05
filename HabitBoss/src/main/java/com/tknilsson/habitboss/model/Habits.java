@@ -15,9 +15,9 @@ import static com.google.common.collect.Collections2.filter;
 public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
 
     public Habits(){
-        this.put(Habit.TimeWindow.DAILY, new ArrayList<Habit>());
-        this.put(Habit.TimeWindow.WEEKLY, new ArrayList<Habit>());
-        this.put(Habit.TimeWindow.MONTHLY, new ArrayList<Habit>());
+        this.setHabitsFor(Habit.TimeWindow.DAILY, new ArrayList<Habit>());
+        this.setHabitsFor(Habit.TimeWindow.WEEKLY, new ArrayList<Habit>());
+        this.setHabitsFor(Habit.TimeWindow.MONTHLY, new ArrayList<Habit>());
     }
 
     // FIXME: clean this up a bit
@@ -38,7 +38,7 @@ public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
         Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue daily");
         overdue.setLastTicked(DateTime.now().minusHours(25));
         habitList.add(addedYesterday); habitList.add(notDue); habitList.add(dueSoon); habitList.add(overdue);
-        habits.put(timeWindow, habitList);
+        habits.setHabitsFor(timeWindow, habitList);
 
         habitList = new ArrayList<Habit>();
         timeWindow = Habit.TimeWindow.WEEKLY;
@@ -48,7 +48,7 @@ public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
         overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue weekly");
         overdue.setLastTicked(DateTime.now().minusDays(8));
         habitList.add(notDue); habitList.add(dueSoon); habitList.add(overdue);
-        habits.put(timeWindow, habitList);
+        habits.setHabitsFor(timeWindow, habitList);
 
         habitList = new ArrayList<Habit>();
         timeWindow = Habit.TimeWindow.MONTHLY;
@@ -58,7 +58,7 @@ public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
         overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue monthly");
         overdue.setLastTicked(DateTime.now().minusDays(40));
         habitList.add(notDue); habitList.add(dueSoon); habitList.add(overdue);
-        habits.put(timeWindow, habitList);
+        habits.setHabitsFor(timeWindow, habitList);
 
         return habits;
     }
@@ -72,13 +72,21 @@ public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
     }
 
     public int countActionable(Habit.TimeWindow timeWindow){
-        Collection elementsInTimeWindow = get(timeWindow);
+        Collection elementsInTimeWindow = getHabitsFor(timeWindow);
         return filter(elementsInTimeWindow, new Predicate() {
             @Override
             public boolean apply(@Nullable Object o) {
                 return ((Habit)o).canBeMarkedAsDoneAgain();
             }
         }).size();
+    }
+
+    public ArrayList<Habit> getHabitsFor(Habit.TimeWindow timeWindow){
+        return get(timeWindow);
+    }
+
+    public void setHabitsFor(Habit.TimeWindow timeWindow, ArrayList<Habit> habits){
+        put(timeWindow, habits);
     }
 
 }

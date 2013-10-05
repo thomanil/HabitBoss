@@ -15,11 +15,11 @@ public class HabitsManager {
     }
 
     public static HabitListAdapter getListAdapter(Context ctx, Habit.TimeWindow timeWindow){
-        return new HabitListAdapter(ctx, habits.get(timeWindow));
+        return new HabitListAdapter(ctx, habits.getHabitsFor(timeWindow));
     }
 
     public static int countActionable(Habit.TimeWindow timeWindow){
-        if(habits == null || habits.get(timeWindow) == null){
+        if(habits == null || habits.getHabitsFor(timeWindow) == null){
             return 0;
         }
 
