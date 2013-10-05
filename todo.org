@@ -1,15 +1,16 @@
 * First iteration
 ** Fix dueSoon/overdue/canbeMarked:
-   Save timeLastMarked as usual
 
-   unit tests: define last|current|next day|week|month, check in each range
-   update fixtures accordingly
+   fix time till due calculations work
 
-   can be marked: habit ticked in previous day|week|month
-   due soon: 1hr to next day, 1 day to next week, 7 days to next month
-   overdue: last tick occurred in the day|week|month before last day|wk|mo
+   cleanup testcase
 
-   On adding new habit, toast: "Remember: you have till midnight|sunday|the 31st to mark it as done for the first time."
+   update the fixtures to match all situations
+
+   On adding new habit, display toast:
+   "Remember: you have till midnight|sunday|the 31st to mark it as done for the first time."
+
+   test test test
 
 ** Manage notifications
    http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing

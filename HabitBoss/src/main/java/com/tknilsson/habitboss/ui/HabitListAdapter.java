@@ -83,11 +83,6 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             textView.setTextColor(GREEN);
         }
 
-        if(habit.isSoonDue()){
-            int ORANGE = Color.rgb(255, 94, 41);
-            textView.setTextColor(ORANGE);
-        }
-
         if(habit.isOverdue()){
             textView.setTextColor(Color.RED);
         }

@@ -114,25 +114,71 @@ public class HabitTest  {
 
 
     @Test
-    public void testDailyDueSoon(){/*TODO*/}
+    public void testDailyMarkable(){
+        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        DateTimeUtils.setCurrentMillisFixed(now.getMillis());
+
+        habit.setLastTicked(now.minusHours(1));
+        Assert.assertFalse(habit.canBeMarkedAsDoneAgain());
+
+        habit.setLastTicked(yesterday);
+        Assert.assertTrue(habit.canBeMarkedAsDoneAgain());
+    }
 
     @Test
-    public void testWeeklyDueSoon(){/*TODO*/}
+    public void testWeeklyMarkable(){
+        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        DateTimeUtils.setCurrentMillisFixed(now.getMillis());
+
+        habit.setLastTicked(now.minusHours(1));
+        Assert.assertFalse(habit.canBeMarkedAsDoneAgain());
+
+        habit.setLastTicked(yesterday);
+        Assert.assertFalse(habit.canBeMarkedAsDoneAgain());
+
+        habit.setLastTicked(lastWeek);
+        Assert.assertTrue(habit.canBeMarkedAsDoneAgain());
+    }
 
     @Test
-    public void testMonthlyDueSoon(){/*TODO*/}
+    public void testMonthlyMarkable(){
+        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
+        habit.setLastTicked(now.minusHours(1));
+        Assert.assertFalse(habit.canBeMarkedAsDoneAgain());
+
+        habit.setLastTicked(yesterday);
+        Assert.assertFalse(habit.canBeMarkedAsDoneAgain());
+
+        habit.setLastTicked(lastWeek);
+        Assert.assertFalse(habit.canBeMarkedAsDoneAgain());
+
+        habit.setLastTicked(lastMonth);
+        Assert.assertTrue(habit.canBeMarkedAsDoneAgain());
+    }
 
 
 
     @Test
-    public void testDailyMarkable(){/*TODO*/}
+    public void testDailyTimeToDueDate(){
+
+    }
 
     @Test
-    public void testWeeklyMarkable(){/*TODO*/}
+    public void testWeeklyTimeToDueDate(){
+
+    }
 
     @Test
-    public void testMonthlyMarkable(){/*TODO*/}
+    public void testMonthlyTimeToDueDate(){
+
+    }
+
+
+
+
+
 
 
 

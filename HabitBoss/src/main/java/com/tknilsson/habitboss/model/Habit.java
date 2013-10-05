@@ -26,12 +26,22 @@ public class Habit {
         this.setKind(kind);
         this.setTimeWindow(timeWindow);
         this.setDescription(description);
-        setLastTicked(DateTime.now());
         startNewStreakNow();
+
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
+           setLastTicked(DateTime.now().minusDays(1));
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
+            setLastTicked(DateTime.now().minusWeeks(1));
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
+            setLastTicked(DateTime.now().minusMonths(1));
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
     }
 
     public String getDescription() {
-        return "("+ getShorthandTimeTillDue()+") "+description;
+        return description;
+      //TODO  //return "("+ getShorthandTimeTillDue()+") "+description;
     }
 
     public void setDescription(String description) {
@@ -78,33 +88,12 @@ public class Habit {
         setLastTicked(DateTime.now());
     }
 
-    public boolean canBeMarkedAsDoneAgain(){
-        if(isOverdue() || isSoonDue()){
-            return true;
-        }
-
-        if(getTimeWindow().equals(TimeWindow.DAILY)){
-            DateTime lastMidnight = DateTime.now().withTimeAtStartOfDay();
-            return (getLastTicked().isBefore(lastMidnight));
-        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
-            DateTime lastSunday = DateTime.now().withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(7);
-            return (getLastTicked().isBefore(lastSunday));
-        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
-            DateTime endOfLastMonth = new DateTime().minusMonths(1).dayOfMonth().withMaximumValue();
-            return (getLastTicked().isBefore(endOfLastMonth));
-        } else {
-            throw new RuntimeException("Unexpected timewindow type");
-        }
-    }
-
     public void stopWinningStreak(){
         startNewStreakNow();
     }
 
     public boolean isOverdue() {
         DateTime now = DateTime.now();
-
-
         DateTime lastMidnight = now.withTime(0,0,0,0).withHourOfDay(0);
 
         if(getTimeWindow().equals(TimeWindow.DAILY)){
@@ -121,22 +110,29 @@ public class Habit {
         }
     }
 
-    public boolean isSoonDue() {
-        Duration betweenTickAndNow = (new Interval(getLastTicked(), DateTime.now())).toDuration();
-        long minSinceTick = betweenTickAndNow.getStandardMinutes();
-        long hrsSinceTick = betweenTickAndNow.getStandardHours();
-        long daysSinceTick = betweenTickAndNow.getStandardDays();
+    public boolean canBeMarkedAsDoneAgain(){
+        if(isOverdue()){
+            return true;
+        }
+
+        DateTime now = DateTime.now();
+        DateTime lastMidnight = now.withTime(0,0,0,0).withHourOfDay(0);
 
         if(getTimeWindow().equals(TimeWindow.DAILY)){
-            return (minSinceTick > (23*60)  && minSinceTick < (24*60));
+            return getLastTicked().isBefore(lastMidnight);
         } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
-            return (hrsSinceTick > (6*24) && hrsSinceTick < (7*24));
+            DateTime lastSunday = lastMidnight.withDayOfWeek(1);
+            return getLastTicked().isBefore(lastSunday);
         } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
-            return (daysSinceTick > 27 && daysSinceTick < 31);
+            DateTime endOfLastMonth = lastMidnight.withDayOfMonth(1);
+            return getLastTicked().isBefore(endOfLastMonth);
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
     }
+
+
+
 
     private DateTime getDueDate(){
         if(getTimeWindow().equals(TimeWindow.DAILY)){
