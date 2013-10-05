@@ -3,6 +3,7 @@ package com.tknilsson.habitboss.ui;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         if(!habit.canBeMarkedAsDoneAgain()){
             doneBtn.setVisibility(View.INVISIBLE);
             textView.setTextColor(Color.GRAY);
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         } else {
             int GREEN = Color.parseColor("#008500");
             textView.setTextColor(GREEN);
