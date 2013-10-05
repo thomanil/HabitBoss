@@ -1,4 +1,11 @@
 * First iteration
+** Simplify dueSoon/overdue/canbeMarked:
+   Not a period since last mark
+   Calculate time until next midnight|sunday|month-end
+   Save timeLastMarked as usual
+   For canbemarked, check if it's the day|week|month after the last mark
+   For pending/overdue, check if about to cross into the second day|week|month after the last mark
+   On habit instantiation, save last marked as last day|week|month
 ** Manage notifications
    Create notifications when adding new habits, ticking exisitng ones
    Update notifications when ticking habits
