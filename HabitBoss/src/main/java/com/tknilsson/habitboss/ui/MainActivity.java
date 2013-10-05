@@ -41,12 +41,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         initActionBarAndTabs();
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        refreshTabTitles();
-    }
-
     private void initActionBarAndTabs(){
 
         // Set up the action bar.
@@ -60,6 +54,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        // Force all 3 pages to init/load at once, not just current and adjacent
+        mViewPager.setOffscreenPageLimit(2);
 
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
