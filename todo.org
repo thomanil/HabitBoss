@@ -1,11 +1,16 @@
 * First iteration
-** Simplify dueSoon/overdue/canbeMarked:
-   Not a period since last mark
-   Calculate time until next midnight|sunday|month-end
+** Fix dueSoon/overdue/canbeMarked:
    Save timeLastMarked as usual
-   For canbemarked, check if it's the day|week|month after the last mark
-   For pending/overdue, check if about to cross into the second day|week|month after the last mark
-   On habit instantiation, save last marked as last day|week|month
+
+   unit tests: define last|current|next day|week|month, check in each range
+   update fixtures accordingly
+
+   can be marked: habit ticked in previous day|week|month
+   due soon: 1hr to next day, 1 day to next week, 7 days to next month
+   overdue: last tick occurred in the day|week|month before last day|wk|mo
+
+   On adding new habit, toast: "Remember: you have till midnight|sunday|the 31st to mark it as done for the first time."
+
 ** Manage notifications
    Create notifications when adding new habits, ticking exisitng ones
    Update notifications when ticking habits
@@ -13,19 +18,23 @@
    Popup notifications on due soon/overdue items
    Pop up notifications when approaching/breaking deadlines
 ** Improve look and feel
-*** Proper logo
-    HabitBoss, habit in blue, boss in orange. Just add it in the readme for now.
-    Inkscape/SVG it, put asset in git repo
-*** Proper launcher icon
-    Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
-    Just put the svg in the git repo
+*** Pick out color theme
+    Use color scheme picker
+    Play with style generator
 *** Style/theme with striking colors
+    Extract indicator colors for habits into color theme as well
     Orange & teal
     Orange most dominant, less subtle, used for alerts, notifications, removal
     Blue more suble, multiple shades, most muted, used for confirmations, toasts, dialogs, most widgets
     Use Pantone color book to find nice variations of blue and orange
     To find colors for each element in theme: blueshift regular holo themes & adjust from there
-*** Use icons instead of texts for action bar edit toggle
+*** Proper logo
+    HabitBoss, habit in blue, boss in orange. Just add it in the readme for now.
+    Inkscape/SVG it, put asset in git repo
+*** Proper launcher icon && up-button
+    Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
+    Just put the svg in the git repo
+*** Use icons instead of texts for action bar edit toggle?
 ** Publish on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
