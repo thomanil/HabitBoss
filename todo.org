@@ -1,6 +1,9 @@
 * First iteration
 ** Persist habits
 
+   Encapsulate HashMap<Habit.TimeWindow, ArrayList<Habit>> in a Habits model
+   Make init with/without fixtures a single initial step in HabitsManager, not piecemeal/closely tied to app lifecycle
+
 ** Add background processing + out-of app notifications
    Run service in background
    Run fail processing & end streaks for habits that cross their threshold

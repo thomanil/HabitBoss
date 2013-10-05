@@ -11,14 +11,14 @@ import android.widget.ListView;
 
 import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
-import com.tknilsson.habitboss.model.Habits;
+import com.tknilsson.habitboss.model.HabitsManager;
 
 public class HabitSectionFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
 
     public String getSectionName(){
-        int actionCount = Habits.countActionable(timeWindow);
+        int actionCount = HabitsManager.countActionable(timeWindow);
         if(actionCount == 0){
             return timeWindow.toString();
         } else {
@@ -55,7 +55,7 @@ public class HabitSectionFragment extends Fragment {
     HabitListAdapter doHabitAdapter = null;
 
     private void initUI(){
-        doHabitAdapter = Habits.getListAdapter(getView().getContext(), timeWindow);
+        doHabitAdapter = HabitsManager.getListAdapter(getView().getContext(), timeWindow);
         ListView doListView = (ListView) getView().findViewById(R.id.habit_making_list);
         doListView.setAdapter(doHabitAdapter);
         updateEditContextAwareElements(MainActivity.editingHabits);

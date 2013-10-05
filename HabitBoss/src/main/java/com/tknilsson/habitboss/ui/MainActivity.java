@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.tknilsson.habitboss.R;
-import com.tknilsson.habitboss.model.Habits;
+import com.tknilsson.habitboss.model.HabitsManager;
 
 import java.util.ArrayList;
 
@@ -41,7 +41,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Habits.loadHabitsFromInternalFile();
+        HabitsManager.loadHabitsFromInternalFile();
         initActionBarAndTabs();
         currentMainActivity = this;
     }
@@ -49,7 +49,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Habits.saveHabitsToInternalFile();
+        HabitsManager.saveHabitsToInternalFile();
     }
 
     private void initActionBarAndTabs(){
