@@ -41,7 +41,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        HabitsManager.loadHabitsFromInternalFile();
+        HabitsManager.wipeDataIfTesting(this);
+        if(HabitsManager.isPreviousHabitsPersistedAsJson(this)){
+            HabitsManager.loadHabitsFromInternalFile(this);
+        }
         initActionBarAndTabs();
         currentMainActivity = this;
     }
@@ -49,7 +52,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        HabitsManager.saveHabitsToInternalFile();
+        HabitsManager.saveHabitsToInternalFile(this);
     }
 
     private void initActionBarAndTabs(){

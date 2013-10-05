@@ -1,5 +1,4 @@
 * First iteration
-** Do json + persistence bits
 ** Add background processing + out-of app notifications
    Run service in background
    Run fail processing & end streaks for habits that cross their threshold
