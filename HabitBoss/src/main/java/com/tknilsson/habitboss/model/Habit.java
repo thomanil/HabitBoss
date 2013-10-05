@@ -71,7 +71,7 @@ public class Habit {
     }
 
     public void startNewStreakNow(){
-        setStartOfCurrentStreak(new DateTime());
+        setStartOfCurrentStreak(DateTime.now());
     }
 
     public void markAsDone(){
@@ -97,8 +97,7 @@ public class Habit {
         }
     }
 
-    public void fail(){
-        description += " FAILED!"; // TODO
+    public void stopWinningStreak(){
         startNewStreakNow();
     }
 

@@ -48,7 +48,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
         initActionBarAndTabs();
         currentMainActivity = this;
+        (new BackgroundWorker(this)).start();
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

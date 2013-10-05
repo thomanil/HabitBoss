@@ -1,10 +1,10 @@
 * First iteration
-** Add background processing + out-of app notifications
-   Run service in background
-   Run fail processing & end streaks for habits that cross their threshold
+** Manage notifications
+   Create notifications when adding new habits, ticking exisitng ones
+   Update notifications when ticking habits
+   Remove notifications when removing habits, resetting habits, and deleting app
    Popup notifications on due soon/overdue items
    Pop up notifications when approaching/breaking deadlines
-   Pop up notifications with "did you avoid BADHABIT last period?"
 ** Improve look and feel
 *** Proper logo
     HabitBoss, habit in blue, boss in orange. Just add it in the readme for now.
@@ -30,7 +30,7 @@
     Store creation time, on each startup, check if any have surpassed
     their current day/week/month since last check, Fire off question to
     user if habit has been upheld.
-
+    Pop up notifications with "did you avoid BADHABIT last period?"
 ** More satisfying/visceral feedback on clearing habits
    Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
    Vibration

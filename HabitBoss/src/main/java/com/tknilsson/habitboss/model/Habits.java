@@ -107,6 +107,20 @@ public class Habits {
         }).size();
     }
 
+    public void failAllOVerdues(){
+        failOverdues(dailyHabits);
+        failOverdues(weeklyHabits);
+        failOverdues(monthlyHabits);
+    }
+
+    private void failOverdues(ArrayList<Habit> habits){
+        for (Habit habit : habits){
+            if(habit.isOverdue()){
+                habit.stopWinningStreak();
+            }
+        }
+    }
+
 
 
 }

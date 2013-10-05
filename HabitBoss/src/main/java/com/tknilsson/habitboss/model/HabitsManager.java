@@ -43,6 +43,10 @@ public class HabitsManager {
         return habits.countActionable(timeWindow);
     }
 
+    public static void failAllOverdues(){
+        habits.failAllOVerdues();
+    }
+
     private static final String SERIALIZED_FILE_NAME = "storedHabits.json";
 
     public static boolean isPreviousHabitsPersistedAsJson(Context ctx){
