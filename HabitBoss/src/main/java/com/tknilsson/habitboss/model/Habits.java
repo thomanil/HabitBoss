@@ -1,11 +1,9 @@
 package com.tknilsson.habitboss.model;
 
-
 import android.content.Context;
 
 import com.google.common.base.Predicate;
 import com.tknilsson.habitboss.ui.HabitListAdapter;
-import com.tknilsson.habitboss.ui.HabitSectionFragment;
 
 import org.joda.time.DateTime;
 
@@ -82,5 +80,26 @@ public class Habits {
                 return ((Habit)o).canBeMarkedAsDoneAgain();
             }
         }).size();
+    }
+
+
+    private String habitsToJson(HashMap<Habit.TimeWindow, ArrayList<Habit>> habitsLists){
+        return "json";
+    }
+
+    private HashMap<Habit.TimeWindow, ArrayList<Habit>> habitsFromJson(String json){
+        return new HashMap<Habit.TimeWindow, ArrayList<Habit>>();
+    }
+
+    public static void saveHabitsToInternalFile(){
+        // Serialize to json, store to disk/shared pref?
+        //HashMap<Habit.TimeWindow, ArrayList<Habit>> habitLists
+
+        // Save to internal file:
+        // http://developer.android.com/training/basics/data-storage/files.html#WriteInternalStorage
+    }
+
+    public static void loadHabitsFromInternalFile(){
+        // Fetch string from to disk/shared pref, marshall from json??
     }
 }
