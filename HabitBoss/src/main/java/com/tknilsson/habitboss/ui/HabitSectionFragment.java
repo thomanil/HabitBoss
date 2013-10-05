@@ -13,8 +13,6 @@ import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
 import com.tknilsson.habitboss.model.Habits;
 
-import java.util.ArrayList;
-
 public class HabitSectionFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
