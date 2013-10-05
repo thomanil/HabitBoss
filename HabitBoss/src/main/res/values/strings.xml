@@ -15,4 +15,10 @@
     <string name="start_edit">Edit</string>
     <string name="finish_edit">Done</string>
 
+    <string name="reset_habits">Reset</string>
+    <string name="reset_dialog_title">Reset all habits and settings</string>
+    <string name="reset_dialog_message">This will wipe all your habits and preferences. Are you sure?</string>
+    <string name="reset_dialog_confirm">Yes, go ahead</string>
+    <string name="reset_dialog_cancel">Cancel</string>
+
 </resources>

@@ -54,7 +54,7 @@ public class HabitSectionFragment extends Fragment {
 
     HabitListAdapter doHabitAdapter = null;
 
-    private void initUI(){
+    public void initUI(){
         doHabitAdapter = HabitsManager.getListAdapter(getView().getContext(), timeWindow);
         ListView doListView = (ListView) getView().findViewById(R.id.habit_making_list);
         doListView.setAdapter(doHabitAdapter);

@@ -14,14 +14,20 @@ import java.io.InputStreamReader;
 
 public class HabitsManager {
 
-    private static Habits habits = new Habits();
+    private static Habits habits;
 
     private static boolean USE_TEST_FIXTURE = true;
-    private static boolean WIPE_DATA_ON_EACH_STARTUP = false;
+
 
     static {
+        initHabits();
+    }
+
+    private static void initHabits(){
         if(USE_TEST_FIXTURE){
             habits = Habits.getTestFixture();
+        } else {
+            habits = new Habits();
         }
     }
 
@@ -49,10 +55,9 @@ public class HabitsManager {
         }
     }
 
-    public static void wipeDataIfTesting(Context ctx){
-        if(WIPE_DATA_ON_EACH_STARTUP){
-            HabitsManager.deleteLocallyStoredHabits(ctx);
-        }
+    public static void resetHabits(Context ctx){
+         HabitsManager.deleteLocallyStoredHabits(ctx);
+         initHabits();
     }
 
     public static void saveHabitsToInternalFile(Context ctx){

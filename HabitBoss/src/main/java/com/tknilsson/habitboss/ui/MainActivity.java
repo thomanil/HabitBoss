@@ -1,7 +1,9 @@
 package com.tknilsson.habitboss.ui;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -41,7 +43,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        HabitsManager.wipeDataIfTesting(this);
         if(HabitsManager.isPreviousHabitsPersistedAsJson(this)){
             HabitsManager.loadHabitsFromInternalFile(this);
         }
@@ -112,9 +113,28 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             case R.id.toggle_edit_mode:
                 toggleEditMode();
                 return true;
+            case R.id.reset_habits:
+                resetIfUserConfirms();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void resetIfUserConfirms(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.reset_dialog_title)
+                .setMessage(R.string.reset_dialog_message)
+                .setPositiveButton(R.string.reset_dialog_confirm, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resetHabits();
+                    }
+                })
+                .setNegativeButton(R.string.reset_dialog_cancel, null)
+                .show();
     }
 
     @Override
@@ -155,6 +175,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         refreshTabTitles();
     }
 
+    private void resetHabits(){
+        HabitsManager.resetHabits(this);
+        refreshAllHabitPages();
+    }
+
     public void refreshTabTitles(){
         if(tabs.size() == 3){
             tabs.get(0).setText(mSectionsPagerAdapter.getPageTitle(0));
@@ -162,6 +187,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             tabs.get(2).setText(mSectionsPagerAdapter.getPageTitle(2));
         }
         mViewPager.invalidate();
+    }
+
+    public void refreshAllHabitPages(){
+        ((HabitSectionFragment)mSectionsPagerAdapter.getItem(0)).initUI();
+        ((HabitSectionFragment)mSectionsPagerAdapter.getItem(1)).initUI();
+        ((HabitSectionFragment)mSectionsPagerAdapter.getItem(2)).initUI();
+        refreshTabTitles();
     }
 
     public void addHabit(View view) {
