@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeUtils;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -42,6 +43,33 @@ public class HabitTest  {
 
         Habit monthlyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
         Assert.assertFalse(monthlyHabit.isOverdue());
+    }
+
+    static {
+        String fmt = "HH:mm dd/MM";
+        System.out.println("\n");
+
+        DateTime midDayMidWeekMidMonth = DateTime.now().withDayOfMonth(15).withDayOfWeek(3).withHourOfDay(12);
+        DateTime now = midDayMidWeekMidMonth; System.out.println(" now (mid day/week/month) : " + now.toString(fmt));
+        System.out.println("\n");
+
+        DateTime dayBeforeLast = now.minusDays(2); System.out.println(" dayBeforeLast : " + dayBeforeLast.toString(fmt));
+        DateTime yesterday = now.minusDays(1); System.out.println(" yesterday : " + yesterday.toString(fmt));
+        DateTime comingMidnight = now.withTimeAtStartOfDay().plusHours(24);System.out.println(" comingMidnight : " + comingMidnight.toString(fmt));
+        DateTime tomorrow = now.plusDays(1); System.out.println(" tomorrow : " + tomorrow.toString(fmt));
+        System.out.println("\n");
+
+        DateTime weekBeforeLast = now.minusDays(10); System.out.println(" weekBeforeLast : " + weekBeforeLast.toString(fmt));
+        DateTime lastWeek = now.minusDays(7); System.out.println(" lastWeek : " + lastWeek.toString(fmt));
+        DateTime comingSunday = now.withDayOfWeek(7); System.out.println(" comingSunday : " + comingSunday.toString(fmt));
+        DateTime nextWeek = now.plusDays(7); System.out.println(" nextWeek : " + nextWeek.toString(fmt));
+        System.out.println("\n");
+
+        DateTime monthBeforeLast = now.minusDays(50); System.out.println(" monthBeforeLast : " + monthBeforeLast.toString(fmt));
+        DateTime lastMonth = now.minusDays(30); System.out.println(" lastMonth : " + lastMonth.toString(fmt));
+        DateTime lastDayOfMonth = now.dayOfMonth().withMaximumValue(); System.out.println(" lastDayOfMonth : " + lastDayOfMonth.toString(fmt));
+        DateTime nextMonth = now.plusDays(30); System.out.println(" nextMonth : " + nextMonth.toString(fmt));
+        System.out.println("\n");
     }
 
     @Test
