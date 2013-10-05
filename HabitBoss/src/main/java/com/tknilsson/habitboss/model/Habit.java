@@ -102,12 +102,20 @@ public class Habit {
     }
 
     public boolean isOverdue() {
+        DateTime now = DateTime.now();
+
+
+        DateTime lastMidnight = now.withTime(0,0,0,0).withHourOfDay(0);
+
         if(getTimeWindow().equals(TimeWindow.DAILY)){
-            return DateTime.now().isAfter(getLastTicked().plusDays(1));
+            DateTime midnightBefore = lastMidnight.minusHours(24);
+            return getLastTicked().isBefore(midnightBefore);
         } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
-            return DateTime.now().isAfter(getLastTicked().plusWeeks(1));
+            DateTime sundayBeforeLastSunday = lastMidnight.withDayOfWeek(1).minusWeeks(1);
+            return getLastTicked().isBefore(sundayBeforeLastSunday);
         } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
-            return DateTime.now().isAfter(getLastTicked().plusMonths(1));
+            DateTime monthEndBeforeLastMonthEnd = lastMidnight.withDayOfMonth(1).minusMonths(1);
+            return getLastTicked().isBefore(monthEndBeforeLastMonthEnd);
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }

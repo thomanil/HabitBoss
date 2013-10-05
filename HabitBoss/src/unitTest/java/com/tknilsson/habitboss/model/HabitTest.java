@@ -1,5 +1,7 @@
 package com.tknilsson.habitboss.model;
 
+import com.tknilsson.habitboss.model.Habit;
+
 import junit.framework.Assert;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
@@ -33,6 +35,8 @@ public class HabitTest  {
        Assert.assertTrue(habit.getDescription().contains("Walk the dog"));
     }
 
+    // TODO back later
+    /*
     @Test
     public void testNewlyCreatedHabitsShouldNotBeOverdue() {
         Habit dailyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
@@ -43,43 +47,69 @@ public class HabitTest  {
 
         Habit monthlyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
         Assert.assertFalse(monthlyHabit.isOverdue());
-    }
+    }*/
 
-    static {
-        String fmt = "HH:mm dd/MM";
-        System.out.println("\n");
+
+        //String fmt = "HH:mm dd/MM";
 
         DateTime midDayMidWeekMidMonth = DateTime.now().withDayOfMonth(15).withDayOfWeek(3).withHourOfDay(12);
-        DateTime now = midDayMidWeekMidMonth; System.out.println(" now (mid day/week/month) : " + now.toString(fmt));
-        System.out.println("\n");
+        DateTime now = midDayMidWeekMidMonth; //System.out.println(" now (mid day/week/month) : " + now.toString(fmt));
+        //System.out.println("\n");
 
-        DateTime dayBeforeLast = now.minusDays(2); System.out.println(" dayBeforeLast : " + dayBeforeLast.toString(fmt));
-        DateTime yesterday = now.minusDays(1); System.out.println(" yesterday : " + yesterday.toString(fmt));
-        DateTime comingMidnight = now.withTimeAtStartOfDay().plusHours(24);System.out.println(" comingMidnight : " + comingMidnight.toString(fmt));
-        DateTime tomorrow = now.plusDays(1); System.out.println(" tomorrow : " + tomorrow.toString(fmt));
-        System.out.println("\n");
+        DateTime dayBeforeLast = now.minusDays(2); //System.out.println(" dayBeforeLast : " + dayBeforeLast.toString(fmt));
+        DateTime yesterday = now.minusDays(1); //System.out.println(" yesterday : " + yesterday.toString(fmt));
+        DateTime comingMidnight = now.withTimeAtStartOfDay().plusHours(24);//System.out.println(" comingMidnight : " + comingMidnight.toString(fmt));
+        DateTime tomorrow = now.plusDays(1); //System.out.println(" tomorrow : " + tomorrow.toString(fmt));
+        //System.out.println("\n");
 
-        DateTime weekBeforeLast = now.minusDays(10); System.out.println(" weekBeforeLast : " + weekBeforeLast.toString(fmt));
-        DateTime lastWeek = now.minusDays(7); System.out.println(" lastWeek : " + lastWeek.toString(fmt));
-        DateTime comingSunday = now.withDayOfWeek(7); System.out.println(" comingSunday : " + comingSunday.toString(fmt));
-        DateTime nextWeek = now.plusDays(7); System.out.println(" nextWeek : " + nextWeek.toString(fmt));
-        System.out.println("\n");
+        DateTime weekBeforeLast = now.minusDays(10); //System.out.println(" weekBeforeLast : " + weekBeforeLast.toString(fmt));
+        DateTime lastWeek = now.minusDays(7); //System.out.println(" lastWeek : " + lastWeek.toString(fmt));
+        DateTime comingSunday = now.withDayOfWeek(7); //System.out.println(" comingSunday : " + comingSunday.toString(fmt));
+        DateTime nextWeek = now.plusDays(7); //System.out.println(" nextWeek : " + nextWeek.toString(fmt));
+        //System.out.println("\n");
 
-        DateTime monthBeforeLast = now.minusDays(50); System.out.println(" monthBeforeLast : " + monthBeforeLast.toString(fmt));
-        DateTime lastMonth = now.minusDays(30); System.out.println(" lastMonth : " + lastMonth.toString(fmt));
-        DateTime lastDayOfMonth = now.dayOfMonth().withMaximumValue(); System.out.println(" lastDayOfMonth : " + lastDayOfMonth.toString(fmt));
-        DateTime nextMonth = now.plusDays(30); System.out.println(" nextMonth : " + nextMonth.toString(fmt));
-        System.out.println("\n");
+        DateTime monthBeforeLast = now.minusDays(50); //System.out.println(" monthBeforeLast : " + monthBeforeLast.toString(fmt));
+        DateTime lastMonth = now.minusDays(30); //System.out.println(" lastMonth : " + lastMonth.toString(fmt));
+        DateTime lastDayOfMonth = now.dayOfMonth().withMaximumValue(); //System.out.println(" lastDayOfMonth : " + lastDayOfMonth.toString(fmt));
+        DateTime nextMonth = now.plusDays(30); //System.out.println(" nextMonth : " + nextMonth.toString(fmt));
+        //System.out.println("\n");
+
+
+    @Test
+    public void testDailyOverdue(){
+        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        DateTimeUtils.setCurrentMillisFixed(now.getMillis());
+
+        habit.setLastTicked(yesterday);
+        Assert.assertFalse(habit.isOverdue());
+
+        habit.setLastTicked(dayBeforeLast);
+        Assert.assertTrue(habit.isOverdue());
     }
 
     @Test
-    public void testDailyOverdue(){/*TODO*/}
+    public void testWeeklyOverdue(){
+        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        DateTimeUtils.setCurrentMillisFixed(now.getMillis());
+
+        habit.setLastTicked(lastWeek);
+        Assert.assertFalse(habit.isOverdue());
+
+        habit.setLastTicked(weekBeforeLast);
+        Assert.assertTrue(habit.isOverdue());
+    }
 
     @Test
-    public void testWeeklyOverdue(){/*TODO*/}
+    public void testMonthlyOverdue(){
+        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
-    @Test
-    public void testMonthlyOverdue(){/*TODO*/}
+        habit.setLastTicked(lastMonth);
+        Assert.assertFalse(habit.isOverdue());
+
+        habit.setLastTicked(monthBeforeLast);
+        Assert.assertTrue(habit.isOverdue());
+    }
 
 
 
