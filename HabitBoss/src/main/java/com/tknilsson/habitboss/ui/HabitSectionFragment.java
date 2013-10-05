@@ -64,7 +64,7 @@ public class HabitSectionFragment extends Fragment {
     public void updateEditContextAwareElements(boolean editingHabits){
         if (getView() != null && getView().findViewById(R.id.habit_adding) != null){
             if(!editingHabits){
-                getView().findViewById(R.id.habit_adding).setVisibility(View.INVISIBLE);
+                getView().findViewById(R.id.habit_adding).setVisibility(View.GONE);
             } else {
                 getView().findViewById(R.id.habit_adding).setVisibility(View.VISIBLE);
             }

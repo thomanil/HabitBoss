@@ -13,14 +13,14 @@
 *** Proper launcher icon
     Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
     Just put the svg in the git repo
-*** Use icons instead of texts for action bar edit toggle
 *** Style/theme with striking colors
     Orange & teal
     Orange most dominant, less subtle, used for alerts, notifications, removal
     Blue more suble, multiple shades, most muted, used for confirmations, toasts, dialogs, most widgets
     Use Pantone color book to find nice variations of blue and orange
     To find colors for each element in theme: blueshift regular holo themes & adjust from there
-*** Figure out how to make entire screen scrollable when habits fill more than screen
+*** Use icons instead of texts for action bar edit toggle
+
 ** Publish on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
@@ -49,8 +49,8 @@
    Show both editable and non editable field, show/hide as usual
 ** Backend sync
    Use Cloud Save or Google Drive SDK, or something else?
-** Widget (resizable??)
 ** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
+** Widget (resizable??)
 ** Support Nexus 7/tablet form factors
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
