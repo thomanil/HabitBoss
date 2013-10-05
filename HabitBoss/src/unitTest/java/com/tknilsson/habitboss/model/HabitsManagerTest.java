@@ -17,18 +17,6 @@ import static org.junit.Assert.*;
 
 public class HabitsManagerTest  {
 
-    public void testModelToJson() {
-       HabitsManager.initHabitStateWithFixtures();
-       Habits model = HabitsManager.getHabitLists();
-       String json = Habits.toJson(model);
-        // TODO check json
-    }
 
-    @Test
-    public void testModelFromJson(){
-        String json = "";
-        Habits model = Habits.fromJson(json);
-        // TODO check model
-    }
 
 }

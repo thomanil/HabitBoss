@@ -1,9 +1,10 @@
 * First iteration
-** Persist habits
+** Refactor
 
-   Encapsulate HashMap<Habit.TimeWindow, ArrayList<Habit>> in a Habits model
-   Make init with/without fixtures a single initial step in HabitsManager, not piecemeal/closely tied to app lifecycle
+   look for other stuff to move there as well:
+   Make get(timewindow) stuff less cryptic - give it a human readable name
 
+** Do json + persistence bits
 ** Add background processing + out-of app notifications
    Run service in background
    Run fail processing & end streaks for habits that cross their threshold
