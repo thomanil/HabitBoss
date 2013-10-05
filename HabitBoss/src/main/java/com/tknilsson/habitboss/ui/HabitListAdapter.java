@@ -28,6 +28,7 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
 
     public void addNewHabit(Habit habit){
         habits.add(habit);
+        markHabitsChanged();
     }
 
     @Override
@@ -36,6 +37,11 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.habit_line, parent, false);
         return initHabitRow(position, rowView);
+    }
+
+    public void markHabitsChanged(){
+        this.notifyDataSetInvalidated();
+        MainActivity.currentMainActivity.refreshTabTitles();
     }
 
     private View initHabitRow(final int position, final View rowView){
@@ -49,7 +55,7 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 habit.markAsDone();
-                adapter.notifyDataSetInvalidated();
+                markHabitsChanged();
             }
         });
 
@@ -57,7 +63,7 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         removeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 habits.remove(position);
-                adapter.notifyDataSetInvalidated();
+                markHabitsChanged();
             }
         });
 

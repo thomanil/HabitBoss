@@ -20,7 +20,12 @@ public class HabitSectionFragment extends Fragment {
     private Habit.TimeWindow timeWindow;
 
     public String getSectionName(){
-        return timeWindow.toString()+" ("+Habits.countActionable(timeWindow)+")";
+        int actionCount = Habits.countActionable(timeWindow);
+        if(actionCount == 0){
+            return timeWindow.toString();
+        } else {
+            return timeWindow.toString()+" ("+actionCount+")";
+        }
     }
 
     public HabitSectionFragment(Habit.TimeWindow timeWindow) {
@@ -49,7 +54,6 @@ public class HabitSectionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-
     HabitListAdapter doHabitAdapter = null;
 
     private void initUI(){
@@ -66,7 +70,7 @@ public class HabitSectionFragment extends Fragment {
             } else {
                 getView().findViewById(R.id.habit_adding).setVisibility(View.VISIBLE);
             }
-            doHabitAdapter.notifyDataSetInvalidated();
+            doHabitAdapter.markHabitsChanged();
         }
     }
 

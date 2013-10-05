@@ -34,11 +34,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private ArrayList<ActionBar.Tab> tabs = new ArrayList<ActionBar.Tab>();
     private Menu currentMenuOptions;
 
+    public static MainActivity currentMainActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initActionBarAndTabs();
+        currentMainActivity = this;
     }
 
     private void initActionBarAndTabs(){
@@ -141,7 +144,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         refreshTabTitles();
     }
 
-    private void refreshTabTitles(){
+    public void refreshTabTitles(){
         if(tabs.size() == 3){
             tabs.get(0).setText(mSectionsPagerAdapter.getPageTitle(0));
             tabs.get(1).setText(mSectionsPagerAdapter.getPageTitle(1));

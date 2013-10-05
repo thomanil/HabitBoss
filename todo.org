@@ -1,6 +1,4 @@
 * First iteration
-** Fix actionables number in tabs
-*** Make refresh fire after habits are loaded, and each time actionable counts change
 ** Set up background processing
    Clear out habit checked data as each d/w/m ends
    Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
