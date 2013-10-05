@@ -45,6 +45,41 @@ public class HabitTest  {
     }
 
     @Test
+    public void testDailyOverdue(){/*TODO*/}
+
+    @Test
+    public void testWeeklyOverdue(){/*TODO*/}
+
+    @Test
+    public void testMonthlyOverdue(){/*TODO*/}
+
+
+
+    @Test
+    public void testDailyDueSoon(){/*TODO*/}
+
+    @Test
+    public void testWeeklyDueSoon(){/*TODO*/}
+
+    @Test
+    public void testMonthlyDueSoon(){/*TODO*/}
+
+
+
+
+    @Test
+    public void testDailyMarkable(){/*TODO*/}
+
+    @Test
+    public void testWeeklyMarkable(){/*TODO*/}
+
+    @Test
+    public void testMonthlyMarkable(){/*TODO*/}
+
+
+
+    /*
+    @Test
     public void testAllHabitsOverdueOncePastLengthofTimeWindow() {
         Habit dailyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
         dailyHabit.setLastTicked(DateTime.now().minusHours(2));
@@ -178,5 +213,5 @@ public class HabitTest  {
         DateTimeUtils.setCurrentMillisFixed(oneDayBeforeMonthEnd.getMillis());
         Assert.assertFalse(nonMarkable.canBeMarkedAsDoneAgain());
     }
-
+*/
 }

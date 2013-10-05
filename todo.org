@@ -12,6 +12,8 @@
    On adding new habit, toast: "Remember: you have till midnight|sunday|the 31st to mark it as done for the first time."
 
 ** Manage notifications
+   http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
+
    Create notifications when adding new habits, ticking exisitng ones
    Update notifications when ticking habits
    Remove notifications when removing habits, resetting habits, and deleting app
@@ -35,7 +37,7 @@
     Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
     Just put the svg in the git repo
 *** Use icons instead of texts for action bar edit toggle?
-** Publish on marketplace
+** Publish v1 on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
    Also spend some time on marketplace, learn about visibility etc http://developer.android.com/distribute/index.html)
