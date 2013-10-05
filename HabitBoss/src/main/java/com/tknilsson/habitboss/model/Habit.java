@@ -146,16 +146,10 @@ public class Habit {
         String summary;
         if (hoursRemaining == 0){
             summary = ""+(minutesRemaining+1)+"m";
-        } else if(hoursRemaining == 1){
-            summary = "1hr";
-        } else if (hoursRemaining > 1 && hoursRemaining <= 23){
-            summary = ""+(hoursRemaining+1)+"hr";
+        } else if (hoursRemaining >= 1 && hoursRemaining <= 23){
+            summary = ""+(hoursRemaining+1)+"h";
         } else {
-            if(daysRemaining == 1){
-                summary = "1d";
-            } else {
-                summary = ""+(daysRemaining+1)+"d";
-            }
+            summary = ""+(daysRemaining+1)+"d";
         }
 
         return summary;
