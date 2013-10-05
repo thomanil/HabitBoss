@@ -16,19 +16,15 @@ public class Habit {
         GOOD, BAD
     }
 
-    private TimeWindow timeWindow;
-    private Kind kind;
     private String description;
-    private DateTime lastTicked;
-    private DateTime startOfCurrentStreak;
-
-    private Habit (){
-        // Force us to always instantiate with kind and timewindow
-    }
+    private String timeWindow;
+    private String kind;
+    private long lastTicked;
+    private long startOfCurrentStreak;
 
     public Habit(Kind kind, TimeWindow timeWindow, String description){
-        this.kind = kind;
-        this.timeWindow = timeWindow;
+        this.setKind(kind);
+        this.setTimeWindow(timeWindow);
         this.setDescription(description);
         setLastTicked(DateTime.now());
         startNewStreakNow();
@@ -43,19 +39,35 @@ public class Habit {
     }
 
     protected DateTime getLastTicked() {
-        return lastTicked;
+        return new DateTime(lastTicked);
     }
 
     protected void setLastTicked(DateTime lastTicked) {
-        this.lastTicked = lastTicked;
+        this.lastTicked = lastTicked.getMillis();
+    }
+
+    public TimeWindow getTimeWindow() {
+        return TimeWindow.valueOf(timeWindow);
+    }
+
+    public void setTimeWindow(TimeWindow timeWindow) {
+        this.timeWindow = timeWindow.toString();
+    }
+
+    public Kind getKind() {
+        return Kind.valueOf(kind);
+    }
+
+    public void setKind(Kind kind) {
+        this.kind = kind.toString();
     }
 
     protected DateTime getStartOfCurrentStreak() {
-        return startOfCurrentStreak;
+        return new DateTime(startOfCurrentStreak);
     }
 
     protected void setStartOfCurrentStreak(DateTime startOfCurrentStreak) {
-        this.startOfCurrentStreak = startOfCurrentStreak;
+        this.startOfCurrentStreak = startOfCurrentStreak.getMillis();
     }
 
     public void startNewStreakNow(){
@@ -71,15 +83,15 @@ public class Habit {
             return true;
         }
 
-        if(timeWindow.equals(TimeWindow.DAILY)){
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
             DateTime lastMidnight = DateTime.now().withTimeAtStartOfDay();
-            return (lastTicked.isBefore(lastMidnight));
-        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
+            return (getLastTicked().isBefore(lastMidnight));
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
             DateTime lastSunday = DateTime.now().withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(7);
-            return (lastTicked.isBefore(lastSunday));
-        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
+            return (getLastTicked().isBefore(lastSunday));
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
             DateTime endOfLastMonth = new DateTime().minusMonths(1).dayOfMonth().withMaximumValue();
-            return (lastTicked.isBefore(endOfLastMonth));
+            return (getLastTicked().isBefore(endOfLastMonth));
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
@@ -91,35 +103,39 @@ public class Habit {
     }
 
     public boolean isOverdue() {
-        if(timeWindow.equals(TimeWindow.DAILY)){
-            return DateTime.now().isAfter(lastTicked.plusDays(1));
-        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
-            return DateTime.now().isAfter(lastTicked.plusWeeks(1));
-        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
-            return DateTime.now().isAfter(lastTicked.plusMonths(1));
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
+            return DateTime.now().isAfter(getLastTicked().plusDays(1));
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
+            return DateTime.now().isAfter(getLastTicked().plusWeeks(1));
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
+            return DateTime.now().isAfter(getLastTicked().plusMonths(1));
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
     }
 
     public boolean isSoonDue() {
-        Duration betweenTickAndNow = (new Interval(lastTicked, DateTime.now())).toDuration();
+        Duration betweenTickAndNow = (new Interval(getLastTicked(), DateTime.now())).toDuration();
         long minSinceTick = betweenTickAndNow.getStandardMinutes();
         long hrsSinceTick = betweenTickAndNow.getStandardHours();
         long daysSinceTick = betweenTickAndNow.getStandardDays();
 
-        if(timeWindow.equals(TimeWindow.DAILY)){
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
             return (minSinceTick > (23*60)  && minSinceTick < (24*60));
-        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
             return (hrsSinceTick > (6*24) && hrsSinceTick < (7*24));
-        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
             return (daysSinceTick > 27 && daysSinceTick < 31);
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
     }
 
-    // TODO add tests!
+
+
+
+
+    // TODO add junit test coverage!
     public String getShorthandTimeTillDue(){
         if(isOverdue()){
             return "0m";
@@ -127,11 +143,11 @@ public class Habit {
 
         DateTime dueDate = null;
 
-        if(timeWindow.equals(TimeWindow.DAILY)){
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
            dueDate = getLastTicked().plusHours(24);
-        } else if(timeWindow.equals(TimeWindow.WEEKLY)){
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
             dueDate = getLastTicked().plusDays(7);
-        } else if(timeWindow.equals(TimeWindow.MONTHLY)){
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
             dueDate = getLastTicked().plusDays(30);
         } else {
             throw new RuntimeException("Unexpected timewindow type");

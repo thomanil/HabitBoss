@@ -1,5 +1,7 @@
 package com.tknilsson.habitboss.model;
 
+import com.google.common.base.Objects;
+
 import junit.framework.Assert;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
@@ -15,18 +17,15 @@ import static org.junit.Assert.*;
 
 public class HabitsTest  {
 
-    public void testModelToJson() {
-        Habits model = Habits.getTestFixture();
-        String json = Habits.toJson(model);
-        // TODO check json
+    @Test
+    public void testModelToAndFromJson() {
+        Habits original = Habits.getTestFixture();
+        String jsonRepresentation = Habits.toJson(original);
+        Habits remarshalled = Habits.fromJson(jsonRepresentation);
+        Objects.equal(original, remarshalled);
     }
 
-    @Test
-    public void testModelFromJson(){
-        String json = "";
-        Habits model = Habits.fromJson(json);
-        // TODO check model
-    }
+    // TODO also add a test which does the inverse: json->model->json
 
     @Test
     public void testActionable(){

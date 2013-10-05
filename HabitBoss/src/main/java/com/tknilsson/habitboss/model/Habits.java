@@ -1,18 +1,44 @@
 package com.tknilsson.habitboss.model;
 
 import com.google.common.base.Predicate;
-
 import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import com.google.gson.Gson;
 
 import javax.annotation.Nullable;
 
 import static com.google.common.collect.Collections2.filter;
 
-public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
+public class Habits {
+
+    ArrayList<Habit> dailyHabits = new ArrayList<Habit>();
+    ArrayList<Habit> weeklyHabits = new ArrayList<Habit>();
+    ArrayList<Habit> monthlyHabits = new ArrayList<Habit>();
+
+    public ArrayList<Habit> getHabitsFor(Habit.TimeWindow timeWindow){
+        if(timeWindow.equals(Habit.TimeWindow.DAILY)){
+           return dailyHabits;
+        } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
+            return weeklyHabits;
+        } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){
+            return monthlyHabits;
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
+    }
+
+    public void setHabitsFor(Habit.TimeWindow timeWindow, ArrayList<Habit> habits){
+        if(timeWindow.equals(Habit.TimeWindow.DAILY)){
+            dailyHabits = habits;
+        } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
+            weeklyHabits = habits;
+        } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){
+            monthlyHabits = habits;
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
+    }
 
     public Habits(){
         this.setHabitsFor(Habit.TimeWindow.DAILY, new ArrayList<Habit>());
@@ -64,11 +90,11 @@ public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
     }
 
     public static String toJson(Habits habits){
-        return "json";
+        return new Gson().toJson(habits);
     }
 
     public static Habits fromJson(String json){
-        return new Habits();
+        return new Gson().fromJson(json, Habits.class);
     }
 
     public int countActionable(Habit.TimeWindow timeWindow){
@@ -81,12 +107,6 @@ public class Habits extends HashMap<Habit.TimeWindow, ArrayList<Habit>> {
         }).size();
     }
 
-    public ArrayList<Habit> getHabitsFor(Habit.TimeWindow timeWindow){
-        return get(timeWindow);
-    }
 
-    public void setHabitsFor(Habit.TimeWindow timeWindow, ArrayList<Habit> habits){
-        put(timeWindow, habits);
-    }
 
 }
