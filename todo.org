@@ -1,17 +1,14 @@
 * First iteration
-** Set up background processing
-   Clear out habit checked data as each d/w/m ends
-   Set much tighter time windows for each category to test: 1 sec, 10 sec, 1minute
-** Implement the habit-breaking part
-    have to answer "did you avoid... yesterday|last week|last month?"
-    after each period?
-    Store creation time, on each startup, check if any have surpassed
-    their current day/week/month since last check, Fire off question to
-    user if habit has been upheld.
 ** Add db persistence
    Create DAOs (use the greendao stuff)
    Swap out that arraylist with proper db-backed cursor or similar
    Initial dataset, include example habits
+** Add background processing + out-of app notifications
+   Run service in background
+   Run fail processing & end streaks for habits that cross their threshold
+   Popup notifications on due soon/overdue items
+   Pop up notifications when approaching/breaking deadlines
+   Pop up notifications with "did you avoid BADHABIT last period?"
 ** Improve look and feel
    Fix Krita install!
 *** Proper logo
@@ -28,15 +25,17 @@
     Use Pantone color book to find nice variations of blue and orange
     To find colors for each element in theme: blueshift regular holo themes & adjust from there
 *** Figure out how to make entire screen scrollable when habits fill more than screen
-** Add out-of app notifications
-   Run in background
-   Pop up notifications when approaching/breaking deadlines
-   Pop up notifications with "did you avoid BADHABIT last period?"
-   Link notifications into intent to HB app
 ** Publish on marketplace
    Make it available
    Also spend some time on marketplace, learn about visibility etc http://developer.android.com/distribute/index.html)
 * More features
+** Implement the habit-breaking part
+    have to answer "did you avoid... yesterday|last week|last month?"
+    after each period?
+    Store creation time, on each startup, check if any have surpassed
+    their current day/week/month since last check, Fire off question to
+    user if habit has been upheld.
+
 ** More satisfying/visceral feedback on clearing habits
    Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
    Vibration
