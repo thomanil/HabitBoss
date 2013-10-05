@@ -77,7 +77,8 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             doneBtn.setVisibility(View.INVISIBLE);
             textView.setTextColor(Color.GRAY);
         } else {
-            textView.setTextColor(Color.BLUE);
+            int GREEN = Color.parseColor("#008500");
+            textView.setTextColor(GREEN);
         }
 
         if(habit.isSoonDue()){

@@ -20,7 +20,6 @@
     Use Pantone color book to find nice variations of blue and orange
     To find colors for each element in theme: blueshift regular holo themes & adjust from there
 *** Use icons instead of texts for action bar edit toggle
-
 ** Publish on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
