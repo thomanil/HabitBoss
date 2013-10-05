@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
@@ -73,10 +74,11 @@ public class HabitPageFragment extends Fragment {
     }
 
     public void addHabit(View view) {
-        EditText habitText = ((EditText)getView().findViewById(R.id.new_habit_text));
-        Habit habit = new Habit(Habit.Kind.GOOD, timeWindow, habitText.getEditableText().toString());
+        EditText newHabitText = ((EditText)getView().findViewById(R.id.new_habit_text));
+        Habit habit = new Habit(Habit.Kind.GOOD, timeWindow, newHabitText.getEditableText().toString());
         doHabitAdapter.addNewHabit(habit);
-        habitText.setText("");
+        newHabitText.setText("");
+        //Toast.makeText(getActivity(), "Habit added", Toast.LENGTH_SHORT).show();
     }
 
 }
