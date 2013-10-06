@@ -1,17 +1,13 @@
 * First iteration
-** Fix dueSoon/overdue/canbeMarked:
-
-   fix time till due calculations work
-
-   cleanup testcase
-
-   update the fixtures to match all situations
-
-   On adding new habit, display toast:
+** Change description rendering
+   Not markable: Just strikethrough
+   Markable: Orange text + (due in 3m)
+** Better indicator on adding habit
    "Remember: you have till midnight|sunday|the 31st to mark it as done for the first time."
-
-   test test test
-
+** Fix tests
+   Update the fixtures to match all situations
+   Add due date/remaining tests
+   Cleanup testcase
 ** Manage notifications
    http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
 

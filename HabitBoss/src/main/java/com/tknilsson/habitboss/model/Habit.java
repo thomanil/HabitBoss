@@ -40,8 +40,8 @@ public class Habit {
     }
 
     public String getDescription() {
-        return description;
-      //TODO  //return "("+ getShorthandTimeTillDue()+") "+description;
+        //return description;
+      return "("+ getTimeRemainingSummary()+") "+description;
     }
 
     public void setDescription(String description) {
@@ -134,7 +134,7 @@ public class Habit {
 
 
 
-    private DateTime getDueDate(){
+    /*private DateTime getDueDate(){
         if(getTimeWindow().equals(TimeWindow.DAILY)){
             return getLastTicked().plusHours(24);
         } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
@@ -144,19 +144,55 @@ public class Habit {
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
+    }*/
+
+    protected DateTime getDeadline(){
+        DateTime thisHour = DateTime.now().withTime(0,0,0,0);
+        DateTime lastMidnight = thisHour.withHourOfDay(0);
+        DateTime nextMidnight = lastMidnight.plusDays(1);
+        DateTime midnightLastSunday = lastMidnight.withDayOfWeek(1);
+        DateTime midnightComingSunday = lastMidnight.withDayOfWeek(1).plusDays(7);
+        DateTime midnightLastMonthsEnd = lastMidnight.withDayOfMonth(1);
+        DateTime midnightComingMonthsEnd = lastMidnight.withDayOfMonth(1).plusMonths(1);
+
+        DateTime dueTime;
+
+        if(getTimeWindow().equals(TimeWindow.DAILY)){
+           if(getLastTicked().isBefore(lastMidnight)){
+               dueTime = nextMidnight;
+           } else {
+               dueTime = nextMidnight.plusDays(1);
+           }
+        } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
+            if(getLastTicked().isBefore(midnightLastSunday)){
+                dueTime = midnightComingSunday;
+            } else {
+                dueTime = midnightComingSunday.plusWeeks(1);
+            }
+        } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
+            if(getLastTicked().isBefore(midnightLastMonthsEnd)){
+                dueTime = midnightComingMonthsEnd;
+            } else {
+                dueTime = midnightComingSunday.plusMonths(1);
+            }
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
+
+        return dueTime;
     }
 
-    public String getShorthandTimeTillDue(){
+    // 0m, 1m, 3m [...] 59m, 1hr, 2h, 3h [...] 23hr, 1d, 2d, 3d [....]
+    public String getTimeRemainingSummary(){
         if(isOverdue()){
             return "0m";
         }
 
-        Duration remaining = (new Interval(DateTime.now(), getDueDate())).toDuration();
+        Duration remaining = (new Interval(DateTime.now(), getDeadline())).toDuration();
         long hoursRemaining = remaining.getStandardHours();
         long minutesRemaining = remaining.getStandardMinutes();
         long daysRemaining = remaining.getStandardDays();
 
-        // 1 hr, 2 hrs, 3 hrs [...] 23 hrs, 1day, 2days, 3days [....]
         String summary;
         if (hoursRemaining == 0){
             summary = ""+(minutesRemaining+1)+"m";

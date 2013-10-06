@@ -161,17 +161,17 @@ public class HabitTest  {
 
 
     @Test
-    public void testDailyTimeToDueDate(){
+    public void testDailyTimeRemaining(){
 
     }
 
     @Test
-    public void testWeeklyTimeToDueDate(){
+    public void testWeeklyTimeRemaining(){
 
     }
 
     @Test
-    public void testMonthlyTimeToDueDate(){
+    public void testMonthlyTimeRemaining(){
 
     }
 
