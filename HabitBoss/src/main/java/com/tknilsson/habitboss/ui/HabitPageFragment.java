@@ -81,7 +81,7 @@ public class HabitPageFragment extends Fragment {
 
     public void addHabit(View view) {
         EditText newHabitText = ((EditText)getView().findViewById(R.id.new_habit_text));
-        Habit habit = new Habit(Habit.Kind.GOOD, timeWindow, newHabitText.getEditableText().toString());
+        Habit habit = new Habit(timeWindow, newHabitText.getEditableText().toString());
         doHabitAdapter.addNewHabit(habit);
         newHabitText.setText("");
 

@@ -30,7 +30,7 @@ public class HabitTest  {
 
     @Test
     public void testInstantiation() {
-       Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "Walk the dog");
+       Habit habit = new Habit(Habit.TimeWindow.DAILY, "Walk the dog");
        Assert.assertNotNull(habit);
        Assert.assertTrue(habit.getDescription().contains("Walk the dog"));
     }
@@ -39,13 +39,13 @@ public class HabitTest  {
     /*
     @Test
     public void testNewlyCreatedHabitsShouldNotBeOverdue() {
-        Habit dailyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit dailyHabit = new Habit(Habit.TimeWindow.DAILY, "");
         Assert.assertFalse(dailyHabit.isOverdue());
 
-        Habit weeklyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit weeklyHabit = new Habit(Habit.TimeWindow.WEEKLY, "");
         Assert.assertFalse(weeklyHabit.isOverdue());
 
-        Habit monthlyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit monthlyHabit = new Habit(Habit.TimeWindow.MONTHLY, "");
         Assert.assertFalse(monthlyHabit.isOverdue());
     }*/
 
@@ -77,7 +77,7 @@ public class HabitTest  {
 
     @Test
     public void testDailyOverdue(){
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit habit = new Habit(Habit.TimeWindow.DAILY, "");
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         habit.setLastTicked(yesterday);
@@ -89,7 +89,7 @@ public class HabitTest  {
 
     @Test
     public void testWeeklyOverdue(){
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit habit = new Habit(Habit.TimeWindow.WEEKLY, "");
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         habit.setLastTicked(lastWeek);
@@ -101,7 +101,7 @@ public class HabitTest  {
 
     @Test
     public void testMonthlyOverdue(){
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit habit = new Habit(Habit.TimeWindow.MONTHLY, "");
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         habit.setLastTicked(lastMonth);
@@ -115,7 +115,7 @@ public class HabitTest  {
 
     @Test
     public void testDailyMarkable(){
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit habit = new Habit(Habit.TimeWindow.DAILY, "");
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         habit.setLastTicked(now.minusHours(1));
@@ -127,7 +127,7 @@ public class HabitTest  {
 
     @Test
     public void testWeeklyMarkable(){
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit habit = new Habit(Habit.TimeWindow.WEEKLY, "");
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         habit.setLastTicked(now.minusHours(1));
@@ -142,7 +142,7 @@ public class HabitTest  {
 
     @Test
     public void testMonthlyMarkable(){
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit habit = new Habit(Habit.TimeWindow.MONTHLY, "");
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         habit.setLastTicked(now.minusHours(1));
@@ -185,7 +185,7 @@ public class HabitTest  {
     /*
     @Test
     public void testAllHabitsOverdueOncePastLengthofTimeWindow() {
-        Habit dailyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit dailyHabit = new Habit(Habit.TimeWindow.DAILY, "");
         dailyHabit.setLastTicked(DateTime.now().minusHours(2));
         Assert.assertFalse(dailyHabit.isOverdue());
         dailyHabit.setLastTicked(DateTime.now().minusDays(2));
@@ -193,7 +193,7 @@ public class HabitTest  {
         dailyHabit.setLastTicked(DateTime.now().minusMonths(2));
         Assert.assertTrue(dailyHabit.isOverdue());
 
-        Habit weeklyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit weeklyHabit = new Habit(Habit.TimeWindow.WEEKLY, "");
         weeklyHabit.setLastTicked(DateTime.now().minusHours(2));
         Assert.assertFalse(weeklyHabit.isOverdue());
         weeklyHabit.setLastTicked(DateTime.now().minusDays(2));
@@ -201,7 +201,7 @@ public class HabitTest  {
         weeklyHabit.setLastTicked(DateTime.now().minusMonths(2));
         Assert.assertTrue(weeklyHabit.isOverdue());
 
-        Habit monthlyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit monthlyHabit = new Habit(Habit.TimeWindow.MONTHLY, "");
         monthlyHabit.setLastTicked(DateTime.now().minusHours(2));
         Assert.assertFalse(monthlyHabit.isOverdue());
         monthlyHabit.setLastTicked(DateTime.now().minusDays(2));
@@ -213,7 +213,7 @@ public class HabitTest  {
 
     @Test
     public void testDailyDueSoonOnceWithinAnHourOfDueTime() {
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit habit = new Habit(Habit.TimeWindow.DAILY, "");
 
         habit.setLastTicked(DateTime.now().minusMinutes(30));
         Assert.assertFalse(habit.isSoonDue());
@@ -228,7 +228,7 @@ public class HabitTest  {
 
     @Test
     public void testWeeklyDueSoonWhenWithinADayOfDueTime() {
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit habit = new Habit(Habit.TimeWindow.WEEKLY, "");
 
         habit.setLastTicked(DateTime.now().minusDays(1));
         Assert.assertFalse(habit.isSoonDue());
@@ -242,7 +242,7 @@ public class HabitTest  {
 
     @Test
     public void testMonthlyDueSoonWhenWithinAThreeDaysOfDueTime() {
-        Habit habit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit habit = new Habit(Habit.TimeWindow.MONTHLY, "");
 
         habit.setLastTicked(DateTime.now().minusDays(25));
         Assert.assertFalse(habit.isSoonDue());
@@ -256,7 +256,7 @@ public class HabitTest  {
 
     @Test
     public void testSetHabitDone() {
-        Habit dailyHabit = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit dailyHabit = new Habit(Habit.TimeWindow.DAILY, "");
         dailyHabit.setLastTicked(DateTime.now().minusMonths(2));
         Assert.assertTrue(dailyHabit.isOverdue());
         dailyHabit.markAsDone();
@@ -271,12 +271,12 @@ public class HabitTest  {
         DateTime hourBeforeMidnight = midnightToday.minusHours(1);
         DateTime hourAfterMidnight =  midnightToday.plusHours(1);
 
-        Habit markable = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit markable = new Habit(Habit.TimeWindow.DAILY, "");
         markable.setLastTicked(twohoursBeforeMidnight);
         DateTimeUtils.setCurrentMillisFixed(hourAfterMidnight.getMillis());
         Assert.assertTrue(markable.canBeMarkedAsDoneAgain());
 
-        Habit nonMarkable = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.DAILY, "");
+        Habit nonMarkable = new Habit(Habit.TimeWindow.DAILY, "");
         nonMarkable.setLastTicked(twohoursBeforeMidnight);
         DateTimeUtils.setCurrentMillisFixed(hourBeforeMidnight.getMillis());
         Assert.assertFalse(nonMarkable.canBeMarkedAsDoneAgain());
@@ -289,12 +289,12 @@ public class HabitTest  {
         DateTime oneDayBeforeSunday = sundayThisWeek.minusDays(1);
         DateTime oneDayAfterSunday =  sundayThisWeek.plusDays(1);
 
-        Habit markable = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit markable = new Habit(Habit.TimeWindow.WEEKLY, "");
         markable.setLastTicked(twoDaysBeforeSunday);
         DateTimeUtils.setCurrentMillisFixed(oneDayAfterSunday.getMillis());
         Assert.assertTrue(markable.canBeMarkedAsDoneAgain());
 
-        Habit nonMarkable = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.WEEKLY, "");
+        Habit nonMarkable = new Habit(Habit.TimeWindow.WEEKLY, "");
         nonMarkable.setLastTicked(twoDaysBeforeSunday);
         DateTimeUtils.setCurrentMillisFixed(oneDayBeforeSunday.getMillis());
         Assert.assertFalse(nonMarkable.canBeMarkedAsDoneAgain());
@@ -307,12 +307,12 @@ public class HabitTest  {
         DateTime oneDayBeforeMonthEnd = endOfLastMonth.minusDays(1);
         DateTime oneDayAfterMonthEnd =  endOfLastMonth.plusDays(1);
 
-        Habit markable = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit markable = new Habit(Habit.TimeWindow.MONTHLY, "");
         markable.setLastTicked(twoDaysBeforeMonthEnd);
         DateTimeUtils.setCurrentMillisFixed(oneDayAfterMonthEnd.getMillis());
         Assert.assertTrue(markable.canBeMarkedAsDoneAgain());
 
-        Habit nonMarkable = new Habit(Habit.Kind.GOOD, Habit.TimeWindow.MONTHLY, "");
+        Habit nonMarkable = new Habit(Habit.TimeWindow.MONTHLY, "");
         nonMarkable.setLastTicked(twoDaysBeforeMonthEnd);
         DateTimeUtils.setCurrentMillisFixed(oneDayBeforeMonthEnd.getMillis());
         Assert.assertFalse(nonMarkable.canBeMarkedAsDoneAgain());

@@ -11,19 +11,12 @@ public class Habit {
     public enum TimeWindow {
         DAILY, WEEKLY, MONTHLY
     }
-
-    public enum Kind {
-        GOOD, BAD
-    }
-
     private String description;
     private String timeWindow;
-    private String kind;
     private long lastTicked;
     private long startOfCurrentStreak;
 
-    public Habit(Kind kind, TimeWindow timeWindow, String description){
-        this.setKind(kind);
+    public Habit(TimeWindow timeWindow, String description){
         this.setTimeWindow(timeWindow);
         this.setDescription(description);
         startNewStreakNow();
@@ -65,14 +58,6 @@ public class Habit {
 
     public void setTimeWindow(TimeWindow timeWindow) {
         this.timeWindow = timeWindow.toString();
-    }
-
-    public Kind getKind() {
-        return Kind.valueOf(kind);
-    }
-
-    public void setKind(Kind kind) {
-        this.kind = kind.toString();
     }
 
     protected DateTime getStartOfCurrentStreak() {

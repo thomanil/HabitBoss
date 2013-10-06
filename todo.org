@@ -2,18 +2,10 @@
 ** Manual test/overdue testing
    Set clock manually
    Confirm that things tick over into overdue on midnight today|next sunday|next month
-   Write test for that?
-** Fix tests
+   Write automated tests for that as well?
+** Fix Habit testcase
    Add due date/remaining tests
-   Cleanup testcase
-** Manage notifications
-   http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
-
-   Create notifications when adding new habits, ticking exisitng ones
-   Update notifications when ticking habits
-   Remove notifications when removing habits, resetting habits, and deleting app
-   Popup notifications on due soon/overdue items
-   Pop up notifications when approaching/breaking deadlines
+   Cleanup testcase in general
 ** Improve look and feel
 *** Pick out color theme
     Use color scheme picker
@@ -37,13 +29,19 @@
    Check what happens with habits local file storage when upgrading version of app on play store
    Also spend some time on marketplace, learn about visibility etc http://developer.android.com/distribute/index.html)
 * More features
-** Implement the habit-breaking part
-    have to answer "did you avoid... yesterday|last week|last month?"
-    after each period?
-    Store creation time, on each startup, check if any have surpassed
-    their current day/week/month since last check, Fire off question to
-    user if habit has been upheld.
-    Pop up notifications with "did you avoid BADHABIT last period?"
+** Add external android notifications
+   http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
+
+   Create notifications when adding new habits, ticking exisitng ones
+   Update notifications when ticking habits
+   Remove notifications when removing habits, resetting habits, and deleting app
+   Popup notifications on due soon/overdue items
+   Pop up notifications when approaching/breaking deadlines
+** Make habit descriptions editable in edit mode
+   Show both editable and non editable field, show/hide as usual
+** Add drag-n-drop reordering of each habit list
+   https://github.com/bauerca/drag-sort-listview
+
 ** More satisfying/visceral feedback on clearing habits
    Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
    Vibration
@@ -53,20 +51,17 @@
    Fanfare if sound is turned on
    This is a touch of gamification. Think popcap/blizzard - Peggle!
 
-** Store/visualize streaks/stats
+** Visualize streaks
+   Streaks action in menu, go to separate actity
+   On tablet, just show in-activity?
    Implement and persist Habit.fails variable
    Seinfeld calendar view: visualize each habit streak
-** Make habit descriptions editable in edit mode
-   Show both editable and non editable field, show/hide as usual
 ** Backend sync
    Use Cloud Save or Google Drive SDK, or something else?
-** Special use case on first run: guided "wizard"/overlays for adding habit to make and break
 ** Support Nexus 7/tablet form factors
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
    In remaining screen real-estate: show Seinfeld cal & stats for each habit?
-** Add drag-n-drop reordering of each habit list
-   https://github.com/bauerca/drag-sort-listview
 * Dev environment
 ** Go through vogella and google testing material again
 ** Add some roboelectric tests
