@@ -79,7 +79,7 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             text.setText(habit.getDescription());
             if(habit.isOverdue()){
                 text.setTextColor(Color.RED);
-                summary = summary + " (OVERDUE)";
+                summary = summary + " ("+context.getString(R.string.overdue)+")";
             } else {
                 int ORANGE = Color.rgb(255, 94, 41);
                 text.setTextColor(ORANGE);

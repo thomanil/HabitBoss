@@ -11,6 +11,8 @@
 
     <LinearLayout
         android:id="@+id/habit_adding"
+        android:layout_marginTop="10sp"
+        android:layout_marginBottom="30sp"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">

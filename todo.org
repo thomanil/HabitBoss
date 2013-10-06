@@ -1,5 +1,4 @@
 * Publish first iteration
-** Move any remaining hardcoded strings into strings.xml
 ** Finish Habit(s) testcase
    Add due date/remaining tests
    Cleanup testcase in general

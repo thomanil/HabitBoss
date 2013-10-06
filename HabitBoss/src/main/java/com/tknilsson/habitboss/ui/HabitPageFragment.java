@@ -85,13 +85,13 @@ public class HabitPageFragment extends Fragment {
         doHabitAdapter.addNewHabit(habit);
         newHabitText.setText("");
 
-        String feedback = "New habit added. ";
+        String feedback = view.getContext().getString(R.string.new_habit_added)+ " ";
         if(timeWindow.equals(Habit.TimeWindow.DAILY)){
-           feedback = feedback + "You have till midnight to get it done the first time.";
+           feedback = feedback + view.getContext().getString(R.string.daily_habit_added_feedback);
         } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
-            feedback = feedback + "You have till Sunday to get it done the first time.";
+            feedback = feedback + view.getContext().getString(R.string.weekly_habit_added_feedback);
         } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){
-            feedback = feedback + "You have till end of this month to get it done the first time.";
+            feedback = feedback + view.getContext().getString(R.string.monthly_habit_added_feedback);
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
