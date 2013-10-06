@@ -1,12 +1,13 @@
 * First iteration
-** Manual test/overdue testing
+** Manual testing of overdue methods
    Set clock manually
    Confirm that things tick over into overdue on midnight today|next sunday|next month
    Write automated tests for that as well?
-** Fix Habit testcase
+** Finish Habit(s) testcase
    Add due date/remaining tests
    Cleanup testcase in general
-** Improve look and feel
+** Move any remaining hardcoded strings into strings.xml
+** Improve look-n-feel, UX
 *** Pick out color theme
     Use color scheme picker
     Play with style generator
@@ -24,11 +25,18 @@
     Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
     Just put the svg in the git repo
 *** Use icons instead of texts for action bar edit toggle?
+*** Handle multi-line habit descriptons gracefully
+*** Make habit descriptions editable in edit mode
+   Show both editable and non editable field, show/hide as usual
+*** Add Undo button in edit mode, left of remove btn
 ** Publish v1 on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
-   Also spend some time on marketplace, learn about visibility etc http://developer.android.com/distribute/index.html)
+   Also spend some time on marketplace to about visibility etc
+   http://developer.android.com/distribute/index.html
 * More features
+** Add drag-n-drop reordering when editing habits
+   https://github.com/bauerca/drag-sort-listview
 ** Add external android notifications
    http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
 
@@ -37,10 +45,8 @@
    Remove notifications when removing habits, resetting habits, and deleting app
    Popup notifications on due soon/overdue items
    Pop up notifications when approaching/breaking deadlines
-** Make habit descriptions editable in edit mode
-   Show both editable and non editable field, show/hide as usual
-** Add drag-n-drop reordering of each habit list
-   https://github.com/bauerca/drag-sort-listview
+** Backend sync
+   Use Cloud Save or Google Drive SDK, or something else?
 
 ** More satisfying/visceral feedback on clearing habits
    Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
@@ -50,14 +56,11 @@
    Stylized unicorn, puppies, kittens, etc gfx?
    Fanfare if sound is turned on
    This is a touch of gamification. Think popcap/blizzard - Peggle!
-
 ** Visualize streaks
    Streaks action in menu, go to separate actity
    On tablet, just show in-activity?
    Implement and persist Habit.fails variable
    Seinfeld calendar view: visualize each habit streak
-** Backend sync
-   Use Cloud Save or Google Drive SDK, or something else?
 ** Support Nexus 7/tablet form factors
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
