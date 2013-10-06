@@ -3,27 +3,30 @@
    Add due date/remaining tests
    Cleanup testcase in general
 ** Improve look-n-feel, UX
-*** Pick out color theme
+*** Add Undo button in edit mode, left of remove btn
+*** Style/theme with striking colors
+    Pick out color theme
     Use color scheme picker
     Play with style generator
-*** Style/theme with striking colors
-    Extract indicator colors for habits into color theme as well
     Orange & teal
     Orange most dominant, less subtle, used for alerts, notifications, removal
     Blue more suble, multiple shades, most muted, used for confirmations, toasts, dialogs, most widgets
-    Use Pantone color book to find nice variations of blue and orange
-    To find colors for each element in theme: blueshift regular holo themes & adjust from there
 *** Proper logo
-    HabitBoss, habit in blue, boss in orange. Just add it in the readme for now.
+    HabitBoss, habit in blue, boss in orange.
+    Just add it in the readme for now.
     Inkscape/SVG it, put asset in git repo
-*** Proper launcher icon && up-button
+*** Proper launcher/up icon
     Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
     Just put the svg in the git repo
-*** Use icons instead of texts for action bar edit toggle?
-*** Handle multi-line habit descriptons gracefully
-*** Make habit descriptions editable in edit mode
-   Show both editable and non editable field, show/hide as usual
-*** Add Undo button in edit mode, left of remove btn
+*** edit mode actions
+    Make edit and done separate actions
+    Hide/show as needed
+    Edit is still text, and put it in the overflow
+*** replace some buttons/texts with iconography & colors
+    Make Done a (colored) checkmark icon, never put it in overflow
+    Make Remove buttons simple (colored) x icons
+    Make Done! button striking orange
+    Make Undo button a back/return icon
 ** Publish v1 on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store

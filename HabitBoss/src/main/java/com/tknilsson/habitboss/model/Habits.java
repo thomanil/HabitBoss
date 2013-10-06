@@ -56,9 +56,9 @@ public class Habits {
         habitList = new ArrayList<Habit>();
         timeWindow = Habit.TimeWindow.DAILY;
 
-        Habit overdueTickedTwoDaysAgo = new Habit(timeWindow, "Daily exercise");
+        Habit overdueTickedTwoDaysAgo = new Habit(timeWindow, "Daily exercise a very long line, yeah yeah yeah yeah lorem ipsum wat wat");
         overdueTickedTwoDaysAgo.setLastTicked(DateTime.now().minusDays(2));
-        Habit tickedYesterdayCanBeTicked = new Habit(timeWindow, "Walk the dog");
+        Habit tickedYesterdayCanBeTicked = new Habit(timeWindow, "Feed the cat");
         DateTime lastMidnight = DateTime.now().withTimeAtStartOfDay();
         tickedYesterdayCanBeTicked.setLastTicked(lastMidnight.minusHours(1));
         Habit newDaily = new Habit(timeWindow, "Floss");

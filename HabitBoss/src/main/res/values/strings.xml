@@ -17,7 +17,7 @@
 
     <string name="reset_habits">Reset</string>
     <string name="reset_dialog_title">Reset all habits and settings</string>
-    <string name="reset_dialog_message">This will wipe all your habits and preferences. Are you sure?</string>
+    <string name="reset_dialog_message">This will wipe all your habits and preferences, and will restore the original sample habits. Are you sure about this?</string>
     <string name="reset_dialog_confirm">Yes, go ahead</string>
     <string name="reset_dialog_cancel">Cancel</string>
 
