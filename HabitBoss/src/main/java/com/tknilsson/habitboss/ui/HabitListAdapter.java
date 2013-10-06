@@ -49,9 +49,6 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
         final Habit habit = habits.get(position);
         final HabitListAdapter adapter = this;
 
-        TextView textView = (TextView) rowView.findViewById(R.id.habit_row_text);
-        textView.setText(habit.getDescription());
-
         final Button doneBtn = (Button) rowView.findViewById(R.id.habit_done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -74,17 +71,25 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             removeBtn.setVisibility(View.INVISIBLE);
         }
 
-        if(!habit.canBeMarkedAsDoneAgain()){
-            doneBtn.setVisibility(View.INVISIBLE);
-            textView.setTextColor(Color.GRAY);
-            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        } else {
-            int GREEN = Color.parseColor("#008500");
-            textView.setTextColor(GREEN);
-        }
+        TextView text = (TextView) rowView.findViewById(R.id.habit_row_text);
 
-        if(habit.isOverdue()){
-            textView.setTextColor(Color.RED);
+
+        if(habit.canBeMarkedAsDoneAgain()){
+            String summary = habit.getDescription();
+            text.setText(habit.getDescription());
+            if(habit.isOverdue()){
+                text.setTextColor(Color.RED);
+                summary = summary + " (OVERDUE)";
+            } else {
+                int ORANGE = Color.rgb(255, 94, 41);
+                text.setTextColor(ORANGE);
+            }
+            text.setText(summary);
+        } else {
+            text.setText(habit.getDescription());
+            doneBtn.setVisibility(View.INVISIBLE);
+            text.setTextColor(Color.GRAY);
+            text.setPaintFlags(text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
         return rowView;

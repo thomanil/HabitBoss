@@ -14,6 +14,8 @@ import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
 import com.tknilsson.habitboss.model.HabitsManager;
 
+import org.joda.time.DateTime;
+
 public class HabitPageFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
@@ -25,6 +27,10 @@ public class HabitPageFragment extends Fragment {
         } else {
             return timeWindow.toString()+" ("+actionCount+")";
         }
+    }
+
+    public HabitPageFragment() {
+
     }
 
     public HabitPageFragment(Habit.TimeWindow timeWindow) {
@@ -78,7 +84,19 @@ public class HabitPageFragment extends Fragment {
         Habit habit = new Habit(Habit.Kind.GOOD, timeWindow, newHabitText.getEditableText().toString());
         doHabitAdapter.addNewHabit(habit);
         newHabitText.setText("");
-        //Toast.makeText(getActivity(), "Habit added", Toast.LENGTH_SHORT).show();
+
+        String feedback = "New habit added. ";
+        if(timeWindow.equals(Habit.TimeWindow.DAILY)){
+           feedback = feedback + "You have till midnight to get it done the first time.";
+        } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
+            feedback = feedback + "You have till Sunday to get it done the first time.";
+        } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){
+            feedback = feedback + "You have till end of this month to get it done the first time.";
+        } else {
+            throw new RuntimeException("Unexpected timewindow type");
+        }
+
+        Toast.makeText(getActivity(), feedback, Toast.LENGTH_LONG).show();
     }
 
 }

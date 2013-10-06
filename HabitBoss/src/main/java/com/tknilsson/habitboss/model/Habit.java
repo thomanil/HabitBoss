@@ -27,21 +27,24 @@ public class Habit {
         this.setTimeWindow(timeWindow);
         this.setDescription(description);
         startNewStreakNow();
+        setLastTickedToLastPeriod();
+    }
 
+    private void setLastTickedToLastPeriod(){
+        DateTime thisHour = DateTime.now().withHourOfDay(0);
         if(getTimeWindow().equals(TimeWindow.DAILY)){
-           setLastTicked(DateTime.now().minusDays(1));
+            setLastTicked(thisHour.minusDays(1));
         } else if(getTimeWindow().equals(TimeWindow.WEEKLY)){
-            setLastTicked(DateTime.now().minusWeeks(1));
+            setLastTicked(thisHour.minusWeeks(1));
         } else if(getTimeWindow().equals(TimeWindow.MONTHLY)){
-            setLastTicked(DateTime.now().minusMonths(1));
+            setLastTicked(thisHour.minusMonths(1));
         } else {
             throw new RuntimeException("Unexpected timewindow type");
         }
     }
 
     public String getDescription() {
-        //return description;
-      return "("+ getTimeRemainingSummary()+") "+description;
+       return description;
     }
 
     public void setDescription(String description) {
@@ -204,9 +207,5 @@ public class Habit {
 
         return summary;
     }
-
-
-
-
 
 }

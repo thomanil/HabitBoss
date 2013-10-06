@@ -55,35 +55,37 @@ public class Habits {
 
         habitList = new ArrayList<Habit>();
         timeWindow = Habit.TimeWindow.DAILY;
-        Habit addedYesterday = new Habit(Habit.Kind.GOOD, timeWindow, "Added yesterday");
+
+        Habit overdueTickedTwoDaysAgo = new Habit(Habit.Kind.GOOD, timeWindow, "Daily exercise");
+        overdueTickedTwoDaysAgo.setLastTicked(DateTime.now().minusDays(2));
+        Habit tickedYesterdayCanBeTicked = new Habit(Habit.Kind.GOOD, timeWindow, "Walk the dog");
         DateTime lastMidnight = DateTime.now().withTimeAtStartOfDay();
-        addedYesterday.setLastTicked(lastMidnight.minusHours(1));
-        Habit notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Just added, not due");
-        Habit dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon daily");
-        dueSoon.setLastTicked(DateTime.now().minusHours(23).minusMinutes(59));
-        Habit overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue daily");
-        overdue.setLastTicked(DateTime.now().minusHours(25));
-        habitList.add(addedYesterday); habitList.add(notDue); habitList.add(dueSoon); habitList.add(overdue);
+        tickedYesterdayCanBeTicked.setLastTicked(lastMidnight.minusHours(1));
+        Habit newDaily = new Habit(Habit.Kind.GOOD, timeWindow, "Floss");
+        newDaily.markAsDone();
+        habitList.add(overdueTickedTwoDaysAgo); habitList.add(tickedYesterdayCanBeTicked); habitList.add(newDaily);
         habits.setHabitsFor(timeWindow, habitList);
 
         habitList = new ArrayList<Habit>();
         timeWindow = Habit.TimeWindow.WEEKLY;
-        notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due weekly");
-        dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon weekly");
-        dueSoon.setLastTicked(DateTime.now().minusDays(6).minusHours(12));
-        overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue weekly");
-        overdue.setLastTicked(DateTime.now().minusDays(8));
-        habitList.add(notDue); habitList.add(dueSoon); habitList.add(overdue);
+        Habit overdueTickedTwoWeeksAgo = new Habit(Habit.Kind.GOOD, timeWindow, "Weekly swim");
+        overdueTickedTwoWeeksAgo.setLastTicked(DateTime.now().minusWeeks(2));
+        Habit tickedLastWeekCanBeTicked = new Habit(Habit.Kind.GOOD, timeWindow, "Sweep the floor");
+        tickedLastWeekCanBeTicked.setLastTicked(DateTime.now().minusWeeks(1));
+        Habit weeklyJustTicked = new Habit(Habit.Kind.GOOD, timeWindow, "Wash clothes");
+        weeklyJustTicked.markAsDone();
+        habitList.add(overdueTickedTwoWeeksAgo); habitList.add(tickedLastWeekCanBeTicked); habitList.add(weeklyJustTicked);
         habits.setHabitsFor(timeWindow, habitList);
 
         habitList = new ArrayList<Habit>();
         timeWindow = Habit.TimeWindow.MONTHLY;
-        notDue = new Habit(Habit.Kind.GOOD, timeWindow, "Not due monthly");
-        dueSoon = new Habit(Habit.Kind.GOOD, timeWindow, "Due soon monthly");
-        dueSoon.setLastTicked(DateTime.now().minusDays(29));
-        overdue = new Habit(Habit.Kind.GOOD, timeWindow, "Overdue monthly");
-        overdue.setLastTicked(DateTime.now().minusDays(40));
-        habitList.add(notDue); habitList.add(dueSoon); habitList.add(overdue);
+        Habit overdueTickedTwoMonthsAgo = new Habit(Habit.Kind.GOOD, timeWindow, "Monthly track meet");
+        overdueTickedTwoMonthsAgo.setLastTicked(DateTime.now().minusMonths(2));
+        Habit tickedLastMonthCanBeTicked = new Habit(Habit.Kind.GOOD, timeWindow, "Cut my hair");
+        tickedLastMonthCanBeTicked.setLastTicked(DateTime.now().minusMonths(1));
+        Habit monthlyJustTicked = new Habit(Habit.Kind.GOOD, timeWindow, "Check tire pressure");
+        monthlyJustTicked.markAsDone();
+        habitList.add(overdueTickedTwoMonthsAgo); habitList.add(tickedLastMonthCanBeTicked); habitList.add(monthlyJustTicked);
         habits.setHabitsFor(timeWindow, habitList);
 
         return habits;
