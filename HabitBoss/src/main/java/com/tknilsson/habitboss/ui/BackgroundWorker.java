@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.tknilsson.habitboss.model.HabitsManager;
 
+import org.joda.time.DateTime;
+
 
 public class BackgroundWorker {
 
@@ -32,6 +34,7 @@ public class BackgroundWorker {
     }
 
     private void work(){
+        //Log.d("thomas", "time: "+ DateTime.now().toString("HH:mm:ss dd/MM"));
         HabitsManager.failAllOverdues();
         mainActivity.refreshAllHabitPages();
         mainActivity.refreshTabTitles();

@@ -15,6 +15,9 @@ import android.view.inputmethod.InputMethodManager;
 import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.HabitsManager;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+
 import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -49,6 +52,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         initActionBarAndTabs();
         currentMainActivity = this;
         (new BackgroundWorker(this)).start();
+        //DateTimeUtils.setCurrentMillisFixed(DateTime.now().withDayOfMonth(1).withHourOfDay(1).plusMonths(1).minusHours(1).minusMinutes(10).getMillis());
     }
 
 

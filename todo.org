@@ -1,12 +1,8 @@
-* First iteration
-** Manual testing of overdue methods
-   Set clock manually
-   Confirm that things tick over into overdue on midnight today|next sunday|next month
-   Write automated tests for that as well?
+* Publish first iteration
+** Move any remaining hardcoded strings into strings.xml
 ** Finish Habit(s) testcase
    Add due date/remaining tests
    Cleanup testcase in general
-** Move any remaining hardcoded strings into strings.xml
 ** Improve look-n-feel, UX
 *** Pick out color theme
     Use color scheme picker
