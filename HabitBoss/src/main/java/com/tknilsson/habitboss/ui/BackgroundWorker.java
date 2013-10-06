@@ -32,9 +32,7 @@ public class BackgroundWorker {
     }
 
     private void work(){
-        //Log.d("thomas", "Background work iteration");
         HabitsManager.failAllOverdues();
-        // TODO if user is trying to break habits, trigger pending followup here
         mainActivity.refreshAllHabitPages();
         mainActivity.refreshTabTitles();
     }
