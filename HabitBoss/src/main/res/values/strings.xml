@@ -22,9 +22,9 @@
     <string name="reset_dialog_cancel">Cancel</string>
 
     <string name="new_habit_added">New habit added. </string>
-    <string name="daily_habit_added_feedback">To stay on track, mark it as "done" before midnight every day.</string>
-    <string name="weekly_habit_added_feedback">To stay on track, mark it as "done" before midnight every Sunday.</string>
-    <string name="monthly_habit_added_feedback">To stay on track, mark it as "done" before each month ends.</string>
+    <string name="daily_habit_added_feedback">To stay on track, mark it as "done" every day - before midnight.</string>
+    <string name="weekly_habit_added_feedback">To stay on track, mark it as "done" every week - before Sunday night.</string>
+    <string name="monthly_habit_added_feedback">To stay on track, mark it as "done" every month - before midnight on the last day.</string>
 
     <string name="overdue">OVERDUE</string>
 
