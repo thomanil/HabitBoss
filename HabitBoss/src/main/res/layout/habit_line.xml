@@ -16,9 +16,21 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/habit_undo_button_label"
+        android:textSize="16sp"
+        android:id="@+id/habit_undo_button"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/habit_remove_button"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/habit_remove_button_label"
         android:id="@+id/habit_remove_button"
         android:textSize="16sp"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
@@ -28,6 +40,7 @@
         android:text="@string/habit_done_button_label"
         android:textSize="16sp"
         android:id="@+id/habit_done_button"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         />

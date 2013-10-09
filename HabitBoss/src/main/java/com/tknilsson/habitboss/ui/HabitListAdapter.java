@@ -57,6 +57,14 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             }
         });
 
+        final Button undoBtn = (Button) rowView.findViewById(R.id.habit_undo_button);
+        undoBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                habit.undo();
+                markHabitsChanged();
+            }
+        });
+
         final Button removeBtn = (Button) rowView.findViewById(R.id.habit_remove_button);
         removeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -65,18 +73,13 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             }
         });
 
-        if (MainActivity.editingHabits){
-            doneBtn.setVisibility(View.INVISIBLE);
-        } else {
-            removeBtn.setVisibility(View.INVISIBLE);
-        }
-
         TextView text = (TextView) rowView.findViewById(R.id.habit_row_text);
-
 
         if(habit.canBeMarkedAsDoneAgain()){
             String summary = habit.getDescription();
             text.setText(habit.getDescription());
+            doneBtn.setVisibility(View.VISIBLE);
+            undoBtn.setVisibility(View.GONE);
             if(habit.isOverdue()){
                 text.setTextColor(Color.RED);
                 summary = summary + " ("+context.getString(R.string.overdue)+")";
@@ -90,6 +93,12 @@ public class HabitListAdapter extends ArrayAdapter<Habit> {
             doneBtn.setVisibility(View.INVISIBLE);
             text.setTextColor(Color.GRAY);
             text.setPaintFlags(text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+
+        if (MainActivity.editingHabits){
+            removeBtn.setVisibility(View.VISIBLE);
+            undoBtn.setVisibility(View.VISIBLE);
+            doneBtn.setVisibility(View.GONE);
         }
 
         return rowView;

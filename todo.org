@@ -1,10 +1,4 @@
 * Publish first iteration
-** Add undo-button to "done" rows
-** Edit-mode actions
-   Make edit and done separate actions
-   Edit is still text, and put it in the overflow
-   Done is always shown in menu
-   Hide/show as needed
 ** Notifications
    http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
 
@@ -21,8 +15,6 @@
    All notificaitons: have descriptive text for time window type
    Aslo include link/intent to start app to check/update habits
 
-** Add Not done button in edit mode, left of remove btn
-   Check that long habit texts don't overlap it...
 ** Finish Habit(s) testcase
    Add due date/remaining tests
    Cleanup testcase in general
@@ -49,6 +41,7 @@
    Test in emulator
    Add compat lib for actionbar etc
 ** Publish v1 on marketplace
+   Clean up code
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
    Also spend some time on marketplace to about visibility etc

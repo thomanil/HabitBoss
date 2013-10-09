@@ -76,6 +76,11 @@ public class Habit {
         setLastTicked(DateTime.now());
     }
 
+    public void undo(){
+        setLastTickedToLastPeriod();
+    }
+
+
     public void stopWinningStreak(){
         startNewStreakNow();
     }
