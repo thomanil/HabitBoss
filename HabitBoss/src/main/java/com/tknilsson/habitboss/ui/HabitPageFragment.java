@@ -37,9 +37,23 @@ public class HabitPageFragment extends Fragment {
         this.timeWindow = timeWindow;
     }
 
+    private static String TIMEWINDOW_KEY = "timeWindow";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            String savedTimewindow = savedInstanceState.getString(TIMEWINDOW_KEY);
+            if (savedTimewindow != null){
+                timeWindow = Habit.TimeWindow.valueOf(savedTimewindow);
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TIMEWINDOW_KEY, timeWindow.toString());
     }
 
     @Override
@@ -87,7 +101,7 @@ public class HabitPageFragment extends Fragment {
 
         String feedback = view.getContext().getString(R.string.new_habit_added)+ " ";
         if(timeWindow.equals(Habit.TimeWindow.DAILY)){
-           feedback = feedback + view.getContext().getString(R.string.daily_habit_added_feedback);
+            feedback = feedback + view.getContext().getString(R.string.daily_habit_added_feedback);
         } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
             feedback = feedback + view.getContext().getString(R.string.weekly_habit_added_feedback);
         } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){

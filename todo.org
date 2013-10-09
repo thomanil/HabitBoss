@@ -1,32 +1,53 @@
 * Publish first iteration
+** Add undo-button to "done" rows
+** Edit-mode actions
+   Make edit and done separate actions
+   Edit is still text, and put it in the overflow
+   Done is always shown in menu
+   Hide/show as needed
+** Notifications
+   http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
+
+   Have NotificationsManager run on every start/resume/stop:
+
+   Create new daily n only if not created yet & dailies still remain - run one hour before midnight
+   Create new weekly only if not created yet & weeklies still remain - run mid-sunday
+   Create new monthly only if not created yet & monthlies still remain - run the 27th of the month
+
+   IF no dailies, remove any exisiting daily notification
+   IF no weeklies, remove any exisiting daily notification
+   IF no monthlies, remove any exisiting daily notification
+
+   All notificaitons: have descriptive text for time window type
+   Aslo include link/intent to start app to check/update habits
+
+** Add Not done button in edit mode, left of remove btn
+   Check that long habit texts don't overlap it...
 ** Finish Habit(s) testcase
    Add due date/remaining tests
    Cleanup testcase in general
-** Improve look-n-feel, UX
-*** Add Undo button in edit mode, left of remove btn
-*** Style/theme with striking colors
+
+** Improve look-n-feel
+*** Style/theme app with striking colors
     Pick out color theme
     Use color scheme picker
     Play with style generator
     Orange & teal
     Orange most dominant, less subtle, used for alerts, notifications, removal
     Blue more suble, multiple shades, most muted, used for confirmations, toasts, dialogs, most widgets
-*** Proper logo
-    HabitBoss, habit in blue, boss in orange.
-    Just add it in the readme for now.
-    Inkscape/SVG it, put asset in git repo
 *** Proper launcher/up icon
-    Icon= Inkscape svg work: blue flat background, orange stylized wakeup clock with checkmark instead of hands
-    Just put the svg in the git repo
-*** edit mode actions
-    Make edit and done separate actions
-    Hide/show as needed
-    Edit is still text, and put it in the overflow
+    Blue flat background matching the scheme
+    orange stylized wakeup clock with checkmark instead of hands
+    Bells and legs
+    very slight gradient and 1px highlight/shadow both on launcher icon edges and the clock object(s)
 *** replace some buttons/texts with iconography & colors
     Make Done a (colored) checkmark icon, never put it in overflow
     Make Remove buttons simple (colored) x icons
     Make Done! button striking orange
     Make Undo button a back/return icon
+** Support 2.3.3
+   Test in emulator
+   Add compat lib for actionbar etc
 ** Publish v1 on marketplace
    Make it available
    Check what happens with habits local file storage when upgrading version of app on play store
@@ -35,14 +56,6 @@
 * More features
 ** Add drag-n-drop reordering when editing habits
    https://github.com/bauerca/drag-sort-listview
-** Add external android notifications
-   http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
-
-   Create notifications when adding new habits, ticking exisitng ones
-   Update notifications when ticking habits
-   Remove notifications when removing habits, resetting habits, and deleting app
-   Popup notifications on due soon/overdue items
-   Pop up notifications when approaching/breaking deadlines
 ** Backend sync
    Use Cloud Save or Google Drive SDK, or something else?
 
@@ -66,7 +79,7 @@
 * Dev environment
 ** Go through vogella and google testing material again
 ** Add some roboelectric tests
-** Add some robotium tests + test on appthwack
+** Add some robotium tests + test extensively on appthwack
 ** Tweak basic Junit testruns to run quicker
 ** Rewrite unit tests to use groovy
    Spock?
