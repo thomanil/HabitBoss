@@ -1,4 +1,7 @@
 * Publish first iteration
+** Finish Habit(s) testcase
+   Add due date/remaining tests
+   Cleanup testcase in general
 ** Notifications
    http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
 
@@ -14,10 +17,6 @@
 
    All notificaitons: have descriptive text for time window type
    Aslo include link/intent to start app to check/update habits
-
-** Finish Habit(s) testcase
-   Add due date/remaining tests
-   Cleanup testcase in general
 
 ** Improve look-n-feel
 *** Style/theme app with striking colors
@@ -43,23 +42,14 @@
 ** Publish v1 on marketplace
    Clean up code
    Make it available
-   Check what happens with habits local file storage when upgrading version of app on play store
    Also spend some time on marketplace to about visibility etc
    http://developer.android.com/distribute/index.html
 * More features
+** Make existing habits texts editable in edit mode
 ** Add drag-n-drop reordering when editing habits
    https://github.com/bauerca/drag-sort-listview
 ** Backend sync
    Use Cloud Save or Google Drive SDK, or something else?
-
-** More satisfying/visceral feedback on clearing habits
-   Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
-   Vibration
-   Streamers, confetti
-   Funny "you are awesome!" popup text
-   Stylized unicorn, puppies, kittens, etc gfx?
-   Fanfare if sound is turned on
-   This is a touch of gamification. Think popcap/blizzard - Peggle!
 ** Visualize streaks
    Streaks action in menu, go to separate actity
    On tablet, just show in-activity?
@@ -69,10 +59,12 @@
    Add custom layout?
    Make text of each habit clickable, act as detail view trigger
    In remaining screen real-estate: show Seinfeld cal & stats for each habit?
-* Dev environment
-** Go through vogella and google testing material again
-** Add some roboelectric tests
-** Add some robotium tests + test extensively on appthwack
-** Tweak basic Junit testruns to run quicker
-** Rewrite unit tests to use groovy
-   Spock?
+** Add animations
+** More satisfying/visceral feedback on clearing habits
+   Add pleasant/gratifiying feedback when all dailies/weeklies/monthlies have been cleared.
+   Vibration
+   Streamers, confetti
+   Funny "you are awesome!" popup text
+   Stylized unicorn, puppies, kittens, etc gfx?
+   Fanfare if sound is turned on
+   This is a touch of gamification. Think popcap/blizzard - Peggle!
