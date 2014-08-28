@@ -1,7 +1,26 @@
 * Publish first iteration
-** Finish Habit(s) testcase
-   Add due date/remaining tests
-   Cleanup testcase in general
+** Fix crashes
+*** Symptom
+    occurred after fresh create, after hitting "edit"
+*** stacktrace
+01-02 08:14:04.950  20055-20055/? E/AndroidRuntime﹕ FATAL EXCEPTION: main
+    Process: com.tknilsson.habitboss, PID: 20055
+    java.lang.NullPointerException
+            at com.tknilsson.habitboss.ui.HabitPageFragment.initUI(HabitPageFragment.java:79)
+            at com.tknilsson.habitboss.ui.MainActivity.refreshAllHabitPages(MainActivity.java:199)
+            at com.tknilsson.habitboss.ui.BackgroundWorker.work(BackgroundWorker.java:39)
+            at com.tknilsson.habitboss.ui.BackgroundWorker.access$000(BackgroundWorker.java:11)
+            at com.tknilsson.habitboss.ui.BackgroundWorker$1.run(BackgroundWorker.java:30)
+            at android.os.Handler.handleCallback(Handler.java:733)
+            at android.os.Handler.dispatchMessage(Handler.java:95)
+            at android.os.Looper.loop(Looper.java:136)
+            at android.app.ActivityThread.main(ActivityThread.java:5017)
+            at java.lang.reflect.Method.invokeNative(Native Method)
+            at java.lang.reflect.Method.invoke(Method.java:515)
+            at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:779)
+            at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:595)
+            at dalvik.system.NativeStart.main(Native Method)
+
 ** Notifications
    http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Managing
 
@@ -36,14 +55,14 @@
     Make Remove buttons simple (colored) x icons
     Make Done! button striking orange
     Make Undo button a back/return icon
-** Support 2.3.3
-   Test in emulator
-   Add compat lib for actionbar etc
 ** Publish v1 on marketplace
+   Make it require at least v4.0
    Clean up code
    Make it available
    Also spend some time on marketplace to about visibility etc
    http://developer.android.com/distribute/index.html
+
+
 * More features
 ** Make existing habits texts editable in edit mode
 ** Add drag-n-drop reordering when editing habits
