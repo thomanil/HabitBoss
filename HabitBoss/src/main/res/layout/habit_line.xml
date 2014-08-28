@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="70sp"
+        android:layout_marginRight="120sp"
         android:id="@+id/habit_row_text"
         android:textSize="16sp"
+        tools:text="Dette er en lang text her ja, hva skjer når den kommer hit "
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:paddingBottom="10sp"/>
@@ -20,6 +23,7 @@
         android:textSize="16sp"
         android:id="@+id/habit_undo_button"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/habit_remove_button"
         />
@@ -31,6 +35,7 @@
         android:id="@+id/habit_remove_button"
         android:textSize="16sp"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true" />
 
@@ -41,6 +46,7 @@
         android:textSize="16sp"
         android:id="@+id/habit_done_button"
         android:visibility="gone"
+        tools:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         />
