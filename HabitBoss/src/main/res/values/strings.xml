@@ -11,7 +11,7 @@
     <string name="habit_add_button_label">Add habit</string>
     <string name="habit_done_button_label">Done!</string>
     <string name="habit_undo_button_label">Undo</string>
-    <string name="habit_remove_button_label">Remove</string>
+    <string name="habit_remove_button_label">-</string>
 
     <string name="start_edit">Edit</string>
     <string name="finish_edit">Finished</string>

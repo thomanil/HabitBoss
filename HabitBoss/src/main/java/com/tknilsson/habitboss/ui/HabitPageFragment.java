@@ -14,18 +14,26 @@ import com.tknilsson.habitboss.R;
 import com.tknilsson.habitboss.model.Habit;
 import com.tknilsson.habitboss.model.HabitsManager;
 
-import org.joda.time.DateTime;
-
 public class HabitPageFragment extends Fragment {
 
     private Habit.TimeWindow timeWindow;
 
+    public Habit.TimeWindow getTimeWindow() {
+        return timeWindow;
+    }
+
+    public void setTimeWindow(Habit.TimeWindow timeWindow) {
+        this.timeWindow = timeWindow;
+    }
+
+
+
     public String getPageName(){
-        int actionCount = HabitsManager.countActionable(timeWindow);
+        int actionCount = HabitsManager.countActionable(getTimeWindow());
         if(actionCount == 0){
-            return timeWindow.toString();
+            return getTimeWindow().toString();
         } else {
-            return timeWindow.toString()+" ("+actionCount+")";
+            return getTimeWindow().toString()+" ("+actionCount+")";
         }
     }
 
@@ -33,8 +41,14 @@ public class HabitPageFragment extends Fragment {
 
     }
 
-    public HabitPageFragment(Habit.TimeWindow timeWindow) {
-        this.timeWindow = timeWindow;
+    //public HabitPageFragment(Habit.TimeWindow timeWindow) {
+    //
+    //}
+
+    public static Fragment getInstance(Habit.TimeWindow timeWindow) {
+        HabitPageFragment habitPageFragment = new HabitPageFragment();
+        habitPageFragment.setTimeWindow(timeWindow);
+        return habitPageFragment;
     }
 
     private static String TIMEWINDOW_KEY = "timeWindow";
@@ -45,7 +59,7 @@ public class HabitPageFragment extends Fragment {
         if(savedInstanceState != null){
             String savedTimewindow = savedInstanceState.getString(TIMEWINDOW_KEY);
             if (savedTimewindow != null){
-                timeWindow = Habit.TimeWindow.valueOf(savedTimewindow);
+                setTimeWindow(Habit.TimeWindow.valueOf(savedTimewindow));
             }
         }
     }
@@ -53,7 +67,7 @@ public class HabitPageFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(TIMEWINDOW_KEY, timeWindow.toString());
+        outState.putString(TIMEWINDOW_KEY, getTimeWindow().toString());
     }
 
     @Override
@@ -76,7 +90,7 @@ public class HabitPageFragment extends Fragment {
     HabitListAdapter doHabitAdapter = null;
 
     public void initUI(){
-        doHabitAdapter = HabitsManager.getListAdapter(getView().getContext(), timeWindow);
+        doHabitAdapter = HabitsManager.getListAdapter(getActivity().getApplicationContext(), getTimeWindow());
         ListView doListView = (ListView) getView().findViewById(R.id.habit_making_list);
         doListView.setAdapter(doHabitAdapter);
         updateEditContextAwareElements(MainActivity.editingHabits);
@@ -95,16 +109,16 @@ public class HabitPageFragment extends Fragment {
 
     public void addHabit(View view) {
         EditText newHabitText = ((EditText)getView().findViewById(R.id.new_habit_text));
-        Habit habit = new Habit(timeWindow, newHabitText.getEditableText().toString());
+        Habit habit = new Habit(getTimeWindow(), newHabitText.getEditableText().toString());
         doHabitAdapter.addNewHabit(habit);
         newHabitText.setText("");
 
         String feedback = view.getContext().getString(R.string.new_habit_added)+ " ";
-        if(timeWindow.equals(Habit.TimeWindow.DAILY)){
+        if(getTimeWindow().equals(Habit.TimeWindow.DAILY)){
             feedback = feedback + view.getContext().getString(R.string.daily_habit_added_feedback);
-        } else if(timeWindow.equals(Habit.TimeWindow.WEEKLY)){
+        } else if(getTimeWindow().equals(Habit.TimeWindow.WEEKLY)){
             feedback = feedback + view.getContext().getString(R.string.weekly_habit_added_feedback);
-        } else if(timeWindow.equals(Habit.TimeWindow.MONTHLY)){
+        } else if(getTimeWindow().equals(Habit.TimeWindow.MONTHLY)){
             feedback = feedback + view.getContext().getString(R.string.monthly_habit_added_feedback);
         } else {
             throw new RuntimeException("Unexpected timewindow type");
@@ -112,5 +126,6 @@ public class HabitPageFragment extends Fragment {
 
         Toast.makeText(getActivity(), feedback, Toast.LENGTH_LONG).show();
     }
+
 
 }

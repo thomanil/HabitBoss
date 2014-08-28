@@ -70,7 +70,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         // Create the adapter that will return a fragment for each of the three
         // primary pages of the app.
-        mHabitPagesPagerAdapter = new HabitPagesPagerAdapter(getSupportFragmentManager(), this);
+        mHabitPagesPagerAdapter = new HabitPagesPagerAdapter(getSupportFragmentManager(), getApplicationContext());
 
         // Set up the ViewPager with the pages adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);

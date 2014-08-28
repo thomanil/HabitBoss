@@ -9,9 +9,9 @@ import com.tknilsson.habitboss.model.Habit;
 
 public class HabitPagesPagerAdapter extends FragmentPagerAdapter {
 
-    Fragment[] pages = new Fragment[] {new HabitPageFragment(Habit.TimeWindow.DAILY),
-            new HabitPageFragment(Habit.TimeWindow.WEEKLY),
-            new HabitPageFragment(Habit.TimeWindow.MONTHLY)};
+    Fragment[] pages = new Fragment[] {HabitPageFragment.getInstance(Habit.TimeWindow.DAILY),
+            HabitPageFragment.getInstance(Habit.TimeWindow.WEEKLY),
+            HabitPageFragment.getInstance(Habit.TimeWindow.MONTHLY)};
 
     Context ctx;
 
